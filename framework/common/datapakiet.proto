@@ -1,0 +1,14 @@
+package datapakiet;
+
+message pakiet {
+	required Type typ = 1;
+	optional string msg = 2;
+	optional int32 port = 3;
+
+	enum Type {
+		PING = 0;
+		COMMAND = 1;
+		FTPDOWNLOAD = 2;
+		EXIT = 3;
+		}
+	}

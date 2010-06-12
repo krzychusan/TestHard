@@ -1,0 +1,13 @@
+
+**** WYMAGANIA ****
+Wymagana jest biblioteka do pythona pyftpdlib.
+Wymagana jest także biblioteka protobuf.
+*******************
+
+**** REPOZYTORIUM ****
+Repozytorium do testowania, nie dla projektu zalozone jest na unfuddle.
+Dane dla repozytorium:
+login: krzychusan
+password: 5120045
+repozytorium 1 svn : http://testhard.unfuddle.com/svn/testhard_project1/
+**********************
