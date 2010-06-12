@@ -67,10 +67,11 @@ class Repository:
             RepConnector.repTypes.append(obj)
 
 
+import re
 print 'Loading plugins...'
 #Load plugins to work with differend types of repositories
 for filename in os.listdir(os.getcwd()+'/framework/plugins/'):
-    if filename[:4] == 'rep_' and filename[-3:] == '.py' and filename != '__init__.py':
+    if re.match('rep_.+\.py',filename):
         print filename
         __import__('framework.plugins.'+filename[:-3])
 
