@@ -1,0 +1,3 @@
+include testhard/config/deployment.ini_tmpl
+recursive-include testhard/public *
+recursive-include testhard/templates *

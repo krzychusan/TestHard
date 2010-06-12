@@ -1,0 +1,19 @@
+
+--------------------------------------
+    Instrukcja jak używać pylons
+-------------------------------------
+Pobieramy wirtualne środowisko dla pythona, aby uniknąć konfliktów z 
+zainstalowanymi bibliotekami
+curl http://pylonshq.com/download/0.9.7/go-pylons.py | python - mydevenv
+
+Przechodzimy do trybu wirtualnego
+source mydevenv/bin/activate
+
+Tworzymy projekt
+paster create -t pylons helloworld
+
+Uruchamiamy w folderze z projektem
+paster serve --reload development.ini
+
+
+
