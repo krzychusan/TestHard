@@ -25,7 +25,7 @@
                     <li>${h.link_to('Main page', url('/'))}</li>
                     <li>${h.link_to('Repository', url('/repository'))}</li>
                     <li>${h.link_to('Run', url('/run'))}</li>
-                    <li>${h.link_to('Schedule', url('/schedule'))}</li>
+                    <li>${h.link_to('Tasks', url('/tasks'))}</li>
                     <li>${h.link_to('Results', url('/results'))}</li>
                 </ul>
             </div>

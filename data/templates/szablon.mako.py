@@ -3,8 +3,8 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1276431151.217505
-_template_filename='/home/vrok/testhard/TestHard/testhard/templates/szablon.mako'
+_modified_time = 1276447088.827559
+_template_filename='/home/kaisen/TestHard/testhard/templates/szablon.mako'
 _template_uri='/szablon.mako'
 _template_cache=cache.Cache(__name__, _modified_time)
 _source_encoding='utf-8'
@@ -38,7 +38,7 @@ def render_body(context,**pageargs):
         __M_writer(escape(h.link_to('Run', url('/run'))))
         __M_writer(u'</li>\n                    <li>')
         # SOURCE LINE 28
-        __M_writer(escape(h.link_to('Schedule', url('/schedule'))))
+        __M_writer(escape(h.link_to('Tasks', url('/tasks'))))
         __M_writer(u'</li>\n                    <li>')
         # SOURCE LINE 29
         __M_writer(escape(h.link_to('Results', url('/results'))))
