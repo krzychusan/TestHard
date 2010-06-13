@@ -45,16 +45,16 @@
 </div>
 
 <div class="fieldwrapper">
-    <label for="about" class="styled">Test commands:</label>
+    <label for="test_cmds" class="styled">Test commands:</label>
     <div class="thefield">
-        <textarea name="test_cmds" id="about"></textarea>
+        <textarea name="test_cmds" id="cmds"></textarea>
     </div>
 </div>
 
 <div class="fieldwrapper">
-    <label for="about" class="styled">Test output path:</label>
+    <label for="results" class="styled">Test output path:</label>
     <div class="thefield">
-        <textarea name="test_results" id="about"></textarea>
+        <textarea name="test_results" id="results"></textarea>
     </div>
 </div>
 

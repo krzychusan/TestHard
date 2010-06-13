@@ -3,8 +3,8 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1276445923.725774
-_template_filename='/home/ravd/TestHard/testhard/templates/repositoryAdd.mako'
+_modified_time = 1276448741.3305719
+_template_filename='/home/kaisen/TestHard/testhard/templates/repositoryAdd.mako'
 _template_uri='/repositoryAdd.mako'
 _template_cache=cache.Cache(__name__, _modified_time)
 _source_encoding='utf-8'
@@ -42,7 +42,7 @@ def render_body(context,**pageargs):
             __M_writer(escape(typ.typ))
             __M_writer(u'</option>\n')
         # SOURCE LINE 43
-        __M_writer(u'        </select>\n    </div>\n</div>\n\n<div class="fieldwrapper">\n    <label for="about" class="styled">Test commands:</label>\n    <div class="thefield">\n        <textarea name="test_cmds" id="about"></textarea>\n    </div>\n</div>\n\n<div class="fieldwrapper">\n    <label for="about" class="styled">Test output path:</label>\n    <div class="thefield">\n        <textarea name="test_results" id="about"></textarea>\n    </div>\n</div>\n\n<div class="fieldwrapper">\n    <label for="about" class="styled">Comment:</label>\n    <div class="thefield">\n        <textarea name="comment" id="about"></textarea>\n</div>\n</div>\n\n<div class="buttonsdiv">\n    <input type="submit" value="Submit" style="margin-left: 150px;" /> <input type="reset" value="Reset" />\n</div>\n\n</form>\n\n\n')
+        __M_writer(u'        </select>\n    </div>\n</div>\n\n<div class="fieldwrapper">\n    <label for="test_cmds" class="styled">Test commands:</label>\n    <div class="thefield">\n        <textarea name="test_cmds" id="cmds"></textarea>\n    </div>\n</div>\n\n<div class="fieldwrapper">\n    <label for="results" class="styled">Test output path:</label>\n    <div class="thefield">\n        <textarea name="test_results" id="results"></textarea>\n    </div>\n</div>\n\n<div class="fieldwrapper">\n    <label for="about" class="styled">Comment:</label>\n    <div class="thefield">\n        <textarea name="comment" id="about"></textarea>\n</div>\n</div>\n\n<div class="buttonsdiv">\n    <input type="submit" value="Submit" style="margin-left: 150px;" /> <input type="reset" value="Reset" />\n</div>\n\n</form>\n\n\n')
         return ''
     finally:
         context.caller_stack._pop_frame()

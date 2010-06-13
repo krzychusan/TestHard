@@ -3,7 +3,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1276447088.827559
+_modified_time = 1276451800.970427
 _template_filename='/home/kaisen/TestHard/testhard/templates/szablon.mako'
 _template_uri='/szablon.mako'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -41,7 +41,7 @@ def render_body(context,**pageargs):
         __M_writer(escape(h.link_to('Tasks', url('/tasks'))))
         __M_writer(u'</li>\n                    <li>')
         # SOURCE LINE 29
-        __M_writer(escape(h.link_to('Results', url('/results'))))
+        __M_writer(escape(h.link_to('Configure', url('/results'))))
         __M_writer(u'</li>\n                </ul>\n            </div>\n        </div>\n        <div id="ft">\n            <p>All rights reserved 2010</p>\n        </div>\n    </div>\n</body>\n</html>\n\n')
         return ''
     finally:

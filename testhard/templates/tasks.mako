@@ -3,6 +3,7 @@
 
 <h2> Tasks </h2>
 
+${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to('Unfinished', url('/'))}
 <table border="1">
 <tr>
     <th>No.</th>
