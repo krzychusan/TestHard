@@ -10,5 +10,7 @@ message pakiet {
 		COMMAND = 1;
 		FTPDOWNLOAD = 2;
 		EXIT = 3;
+        RUNTESTS = 4;
+        GETRESULTS = 5;
 		}
 	}
