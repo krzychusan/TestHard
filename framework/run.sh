@@ -18,6 +18,8 @@ elif [ "$1" = "config-server" ]; then
 	vim $CONSERVER
 elif [ "$1" = "compile-proto" ]; then
 	protoc -I$RELPATH/common $RELPATH/common/datapakiet.proto --python_out=$RELPATH/common
+elif [ "$1" = "create-database" ]; then
+	python createDB.py
 else
 	echo "Dostepne komendy: run-server, run-worker, config-server, compile-proto"
 fi
