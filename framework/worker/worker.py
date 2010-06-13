@@ -19,7 +19,7 @@ class worker:
         for cmd in script_cmds:
             r = [0, 0, 0]
             r[0] = os.system('echo " +++ TESTHARD +++ Running %s:" >> output.tmp' % cmd)
-            r[1] = os.system('%s >> output.tmp' % cmd)
+            r[1] = os.system('%s >> output.tmp 2>> output.tmp' % cmd)
             r[2] = os.system('echo " +++ TESTHARD +++ Last command result: %d" >> output.tmp' % r[1])
             if r != [0, 0, 0]:
                 print 'Error while running tests'
@@ -36,6 +36,23 @@ class worker:
         self.data.msg = result
         self.buffer.send(self.data)
 
+        os.system('rm output.tmp')
+
+    def _run_test(self):
+        cmd = self.data.msg
+
+        retcode = os.system('%s >> output.tmp 2>> output.tmp' % cmd)
+        f = open('output.tmp', 'r')
+        if not f:
+            print 'Nie mozna otworzyc pliku wyjsciowego'
+            self.close()
+        result = ''.join(f.readlines())
+
+        self.data = pakiet()
+        self.data.typ = pakiet.RUNTESTS
+        self.data.msg = result
+        self.buffer.send(self.data)
+        
         os.system('rm output.tmp')
 
     def start(self):
@@ -64,6 +81,8 @@ class worker:
                 self.data.typ = pakiet.FTPDOWNLOAD
                 self.data.msg = 'ok'
                 self.buffer.send(self.data)
+            elif self.data.typ == pakiet.RUNTESTS:
+                self._run_test()
             elif self.data.typ == pakiet.BUILD:
                 self._compile()
             elif self.data.typ == pakiet.EXIT:

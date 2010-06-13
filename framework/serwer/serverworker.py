@@ -24,6 +24,23 @@ class serverworker(Thread):
         else:
             return True
 
+    def _test(self, test_cmd):
+        self.data = pakiet()
+        self.data.typ = pakiet.RUNTESTS
+        self.data.msg = test_cmd
+        self.buffer.send(self.data)
+
+        self.data = self.buffer.read()
+        if self.data.typ != pakiet.RUNTESTS:
+            print 'Blad w wykonywaniu testow!', self.data.msg
+            self.close()
+            return
+        
+        print 'WYNIKI TESTOW'
+        print '/-------------\\'
+        print self.data.msg
+        print '\\-------------/'
+
     def run(self):
         #Send ping
         self.data = pakiet()
@@ -61,9 +78,13 @@ class serverworker(Thread):
 
         self.data = self.buffer.read()
         if not self.data or self.data.typ != pakiet.BUILD:
-            print 'Blad podczas wykonywania testow'
+            print 'Blad podczas budowania'
             #self.close()
             #return
+
+        self._test('ls -1')
+        self._test('cat kotek')
+        self._test('cat /etc/passwd | grep root')
 
         print 'Wykonano testy', self.data.msg
 
