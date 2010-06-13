@@ -25,6 +25,6 @@ class IRepository(object):
         self.login = login
         self.password = password
 	
-	def getValuesTuple(self):
-		return ( self.name, self.url, self.comment \
-				self.typ, self.login, self.password )
+    def getValuesTuple(self):
+        return ( self.name, self.url, self.comment, 
+	    self.typ, self.login, self.password )

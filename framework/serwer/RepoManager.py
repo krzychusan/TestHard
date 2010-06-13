@@ -5,18 +5,12 @@ import os
 import re
 
 #Load plugins to work with differend types of repositories
-path = os.getcwd().split('/')[1:]
-local = os.path.abspath(__file__).split('/')[1:-1]
-prefix = ''
-if len(path) < len(local):
-    prefix = '.'.join(local[len(path)-len(local):])
-    prefix += '.'
 lista = '/'+'/'.join(os.path.abspath(__file__).split('/')[1:-1])+'/plugins/'
 log('Loading repository plugins from '+ lista)
 for filename in os.listdir(lista):
     if re.match('rep_.+\.py$',filename):
         log('* '+filename)
-        __import__(prefix+'plugins.'+filename[:-3])
+        __import__('serwer.plugins.'+filename[:-3])
 
 
 #Class used to communicate with system which stores data
