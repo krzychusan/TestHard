@@ -1,7 +1,14 @@
 
 **** WYMAGANIA ****
-Wymagana jest biblioteka do pythona pyftpdlib.
-Wymagana jest także biblioteka protobuf.
+Wymagana jest zainstalowana biblioteka pyftpdlib
+Nalezy pobrac: http://pyftpdlib.googlecode.com/files/pyftpdlib-0.5.2.tar.gz
+Potem 	(linux) sudo python setup.py install
+(windows) setup.py install
+
+Wymagana jest biblioteka do pythona pysvn.
+Instalacja poprzez apt-get install python-svn
+
+Wymagana jest także biblioteka protobuf 2.2.0.
 *******************
 
 **** REPOZYTORIUM ****

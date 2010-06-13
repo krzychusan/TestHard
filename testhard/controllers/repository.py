@@ -5,26 +5,25 @@ from pylons.controllers.util import abort, redirect_to
 
 from testhard.lib.base import BaseController, render
 
-import framework.repository
-
 log = logging.getLogger(__name__)
 
 class RepositoryController(BaseController):
 
     def index(self):
         # Return a rendered template
-        con = framework.repository.RepConnector()
+        con = RepoManager()
         c.repos = con.getRepositories()
         return render('/repository.mako')
 
     def add(self):
-        con = framework.repository.RepConnector()
+        import framework.plugins.load_rep
+        con = RepoManager()
         c.repTypes = con.getRepositoriesTypes()
         return render('/repositoryAdd.mako')
     
     def doAdd(self):
-        con = framework.repository.RepConnector()
-        added = framework.repository.Repository()
+        con = RepoManager()
+        added = framework.IRepository.IRepository()
         #potrzeba sprawdzenia czy dane sa jako tako dobre i czy w ogole sa
         added.assign(request.params['name'], request.params['url'], request.params['comment'], request.params['type'])
         if request.params['login']:

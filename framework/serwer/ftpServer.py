@@ -1,19 +1,15 @@
 from threading import Thread
 from pyftpdlib import ftpserver
 import os
-''' Wymagana jest zainstalowana biblioteka pyftpdlib
-	Nalezy pobrac: http://pyftpdlib.googlecode.com/files/pyftpdlib-0.5.2.tar.gz
-	Potem 	(linux) sudo python setup.py install
-			(windows) setup.py install
-'''
 
+#Function used to ignore ftp server output
 def logger(msg):
 	pass
 
 class ftpServer(Thread):
-	def __init__(self, path):
+	def __init__(self, path, port):
 		Thread.__init__(self)
-		self.port = 2222
+		self.port = port
 		self.path = path
 
 	def run(self):

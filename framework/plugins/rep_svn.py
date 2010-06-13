@@ -1,6 +1,6 @@
-from ..repository import Repository
+from framework.IRepository import IRepository
 
-class svn(Repository):
+class svn(IRepository):
     def __init__(self):
         self.name = ''
         self.url = ''
@@ -15,5 +15,3 @@ class svn(Repository):
 
     def setAuth(self, login, password):
         pass
-
-svn.initialize(svn())
