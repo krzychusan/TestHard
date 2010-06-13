@@ -9,6 +9,3 @@ def setup_app(command, conf, vars):
     """Place any commands to setup testhard here"""
     load_environment(conf.global_conf, conf.local_conf)
 
-    RepositoryController.repositoryList = ['svn', 'git']
-
-

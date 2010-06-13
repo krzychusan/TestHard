@@ -2,7 +2,7 @@ import sqlite3
 import os
 from serwer.IRepository import IRepository
 
-path = os.path.abspath(__file__[:-10])
+path = os.path.abspath(__file__[:-11])
 print path
 
 dbname = path + '/testHard.db'
