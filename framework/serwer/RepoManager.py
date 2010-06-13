@@ -1,7 +1,6 @@
 from serwer.IRepository import IRepository
 
 from common.utils import log
-import common.dbutils as db
 import os
 import re
 
@@ -31,11 +30,10 @@ class RepoManager:
         return None
 
     def addRepository(self, rep):
-        db.addRepository(rep.getValuesTuple())
         RepoManager.repList.append(rep)
 
     def getRepositories(self):
-        return db.getRepositories()
+        return RepoManager.repList
 
     def getRepositoriesTypes(self):
         return RepoManager.repTypes

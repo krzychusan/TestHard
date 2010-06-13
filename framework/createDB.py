@@ -25,6 +25,5 @@ c.execute('''
 	)
 ''')
 conn.commit()
-conn.close()
 
 print 'Database', dbname, 'created.'
