@@ -8,3 +8,8 @@ def log(info):
     print time.strftime('%X %x'), info
     lock.release()
 
+def setPath():
+    import sys
+    #TODO: RELATIVE PATH NEEDED !!
+    sys.path.append('/home/kaisen/TestHard/framework/')
+    
