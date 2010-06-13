@@ -1,6 +1,7 @@
 from serwer.IRepository import IRepository
 
 from common.utils import log
+from copy import deepcopy
 import common.dbutils as db
 import os
 import re
@@ -22,8 +23,8 @@ class RepoManager:
 
     def convertRepository(self, toConvert):
         for rep in RepoManager.repTypes:
-            if (rep.typ == toConvert.typ):
-                converted = copy.deepcopy(rep)
+            if (rep().typ == toConvert.typ):
+                converted = rep() 
                 converted.assign(toConvert.name, toConvert.url, toConvert.comment, toConvert.typ)
                 if toConvert.Auth:
                     converted.setAuth(toConvert.login, toConvert.password)
@@ -35,13 +36,13 @@ class RepoManager:
         RepoManager.repList.append(rep)
 
     def getRepositories(self):
-        return db.getRepositories()
+        ls = []
+        for a in db.getRepositories():
+            ls.append(self.convertRepository(a))
+        return ls
 
     def getRepositoriesTypes(self):
         return RepoManager.repTypes
     
     def getRepository(self, nazwa):
-        for rep in RepoManager.repList:
-            if rep.name == nazwa:
-                return rep
-
+        pass

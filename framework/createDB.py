@@ -22,10 +22,25 @@ c.execute('''
 		type TEXT,
 		login TEXT,
 		password TEXT,
-        test_cmds TEXT,
-        test_results TEXT
+        build_cmd TEXT,
+        find_tests_cmd TEXT,
+        run_test_cmd TEXT
 	)
 ''')
+
+c.execute("""
+    insert into repositories 
+    (name, url, comment, type, login, password)
+    values (
+        'abcd',
+        'http://testhard.unfuddle.com/svn/testhard_project1/',
+        'asfer',
+        'svn',
+        'krzychusan',
+        '5120045',
+    )
+""")
+
 conn.commit()
 conn.close()
 
