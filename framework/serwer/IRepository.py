@@ -17,9 +17,10 @@ class IRepository(object):
         self.comment = comment
         self.typ = typ
     
-    def setTestAttributes(self, cmds, resdir):
-        self.test_cmds = cmds
-        self.test_result = resdir
+    def setTestAttributes(self, bcmd, fcmd, tcmd ):
+        self.build_cmd = bcmd
+        self.find_tests_cmd = fcmd
+        self.run_test_cmd = tcmd
 
     def download(self, url, revision):
         raise NotImplementedError("Abstract class")
@@ -31,4 +32,5 @@ class IRepository(object):
 	
     def getValuesTuple(self):
         return ( self.name, self.url, self.comment, 
-	    self.typ, self.login, self.password, self.test_cmds, self.test_result )
+	    self.typ, self.login, self.password, self.build_cmd,
+        self.find_tests_cmd, self.run_test_cmd )
