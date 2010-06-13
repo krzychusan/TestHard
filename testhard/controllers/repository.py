@@ -10,6 +10,8 @@ sp()
 
 import serwer.RepoManager
 import serwer.IRepository
+from serwer.RepoManager import RepoManager
+from serwer.IRepository import IRepository
 
 log = logging.getLogger(__name__)
 
@@ -17,19 +19,19 @@ class RepositoryController(BaseController):
 
     def index(self):
         # Return a rendered template
-        con = serwer.RepoManager.RepoManager()
+        con = RepoManager()
         c.repos = con.getRepositories()
         return render('/repository.mako')
 
     def add(self):
-        con = serwer.RepoManager.RepoManager()
+        con = RepoManager()
         c.repTypes = con.getRepositoriesTypes()
         c.repTypes = [it() for it in c.repTypes]
         return render('/repositoryAdd.mako')
     
     def doAdd(self):
         con = RepoManager()
-        added = framework.IRepository.IRepository()
+        added = IRepository()
         #potrzeba sprawdzenia czy dane sa jako tako dobre i czy w ogole sa
         added.assign(request.params['name'], request.params['url'], request.params['comment'], request.params['type'])
         if request.params['login']:
