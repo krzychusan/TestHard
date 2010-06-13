@@ -1,4 +1,5 @@
-from framework.IRepository import IRepository
+from serwer.IRepository import IRepository
+import pysvn
 
 class svn(IRepository):
     def __init__(self):
@@ -9,9 +10,20 @@ class svn(IRepository):
         self.password = ''
         self.typ = 'svn'
         self.comment = ''
+	self.client = pysvn.Client()
 
-    def download(self, url, revision):
-        pass
+    #funkcja pobiera repozytorium svn z adresu repo do folderu dest
+    def download(self, repo, dest):	
+	self.client.checkout(repo, dest)
 
-    def setAuth(self, login, password):
-        pass
+    #funkcja ustawia login i haslo dla uzytkownika, jezeli jest 
+    #wymagane uwierzytelnianie na svnie
+    def setLogin(self, login, password):
+	self.login = login
+	self.password = password
+	self.client.callback_get_login = self._loginCallback
+
+    #pomocnicza funkcja wymagana przy logowaniu
+    def _loginCallback(self, realm, username, may_save):
+        return True, self.login, self.password, True
+		

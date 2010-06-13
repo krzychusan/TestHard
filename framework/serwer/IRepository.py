@@ -1,4 +1,3 @@
-import os
 
 #Abstract class providing interface to create plugins for 
 #different version control systems

@@ -1,3 +1,5 @@
+from common.utils import log
+
 from threading import Thread
 from pyftpdlib import ftpserver
 import os
@@ -23,9 +25,12 @@ class ftpServer(Thread):
 		self.handler = ftpserver.FTPHandler
 		self.handler.authorizer = self.authorize
 		self.ftp = ftpserver.FTPServer(('127.0.0.1', self.port), self.handler)
-		self.ftp.serve_forever()
+		
+                #log('FTP launched on port '+str(self.port)+'.')
+                self.ftp.serve_forever()
 	
 	def close(self):
+		#log('Zamykam FTP')
 		self.ftp.close_all()
 
 

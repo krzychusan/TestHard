@@ -1,12 +1,11 @@
-import repo.svn
-import ftpServer
-import serverworker
 import time
 import ConfigParser
 import threading
 
-def log(info):
-	print time.strftime('%X %x'),info
+import RepoManager
+import ftpServer
+import serverworker
+from common.utils import log
 
 class server:
 	def __init__(self):
@@ -28,7 +27,9 @@ class server:
 			self.authLogin = config.get('Rep', 'login')	#dane do autoryzacji do svna
 			self.authPassword = config.get('Rep', 'password')
 
-		self.svn = repo.svn.svn()
+                rep = RepoManager.RepoManager()
+                rep = rep.getRepositoriesTypes()[0]
+		self.svn = rep()
 		if self.svnauth:
 			self.svn.setLogin(self.authLogin, self.authPassword)
                 self.ftp = ftpServer.ftpServer(self.path, 2222)
@@ -64,10 +65,9 @@ class server:
 		self.serverCond.wait()
 		self.serverCond.release()
 		self.ftp.close()
-		log('Zamykam FTP')
 		self.close()
 
 	
 	def close(self):
-		log('Koniec')
+		log('Koniec.')
 

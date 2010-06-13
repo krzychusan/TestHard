@@ -1,9 +1,10 @@
 from threading import Thread
 import socket
 import server
-from common.datapakiet_pb2 import pakiet
 import struct
+from common.datapakiet_pb2 import pakiet
 from common.bufor import bufor
+from common.utils import log
 
 class serverworker(Thread):
 
@@ -59,7 +60,7 @@ class serverworker(Thread):
 			self.server.serverCond.notify()
 			self.server.serverCond.release()
 		self.server.workersLock.release()
-		server.log('Worker '+self.ip[:-1]+' pobral FTP')
+		log('Worker '+self.ip[:-1]+' pobral FTP')
 
 		#koniec pracy
 		self.data = pakiet()
