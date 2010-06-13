@@ -2,7 +2,7 @@ import sqlite3
 import os
 import sys
 
-dbname = 'serwer/testHard.db'
+dbname = 'common/testHard.db'
 
 if os.path.exists(dbname):
 	print 'Database is already created.'

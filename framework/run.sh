@@ -21,6 +21,6 @@ elif [ "$1" = "compile-proto" ]; then
 elif [ "$1" = "create-database" ]; then
 	python createDB.py
 else
-	echo "Dostepne komendy: run-server, run-worker, config-server, compile-proto"
+	echo "Dostepne komendy: run-server, run-worker, config-server, compile-proto, create-database"
 fi
 
