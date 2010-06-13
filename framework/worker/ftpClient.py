@@ -12,7 +12,7 @@ class ftpClient:
 	def download(self, url, path):
                 print 'url + path:', url, path
                 try:
-			self.ftp.connect(url[0], url[1])
+			self.ftp.connect(url[0], int(url[1]))
 			self.ftp.login('anonymous', self.myip)
 			if not os.path.exists(path):
 				os.makedirs(path)
