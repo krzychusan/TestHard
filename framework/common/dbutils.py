@@ -2,9 +2,7 @@ import sqlite3
 import os
 from serwer.IRepository import IRepository
 
-path = os.path.abspath(__file__[:-10])
-print path
-
+path = '/'+'/'.join(os.path.abspath(__file__).split('/')[1:-1])
 dbname = path + '/testHard.db'
 
 def connect():
