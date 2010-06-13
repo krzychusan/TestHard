@@ -13,7 +13,7 @@ class worker:
         self.path = './ssvn'
         #END
 
-    def _runtests(self):
+    def _compile(self):
         print 'ZIEMIA!'
         script_cmds = self.data.msg.split('\n')
         for cmd in script_cmds:
@@ -32,7 +32,7 @@ class worker:
         result = ''.join(f.readlines())
 
         self.data = pakiet()
-        self.data.typ = pakiet.RUNTESTS
+        self.data.typ = pakiet.BUILD
         self.data.msg = result
         self.buffer.send(self.data)
 
@@ -64,8 +64,8 @@ class worker:
                 self.data.typ = pakiet.FTPDOWNLOAD
                 self.data.msg = 'ok'
                 self.buffer.send(self.data)
-            elif self.data.typ == pakiet.RUNTESTS:
-                self._runtests()
+            elif self.data.typ == pakiet.BUILD:
+                self._compile()
             elif self.data.typ == pakiet.EXIT:
                 self.active = False
 

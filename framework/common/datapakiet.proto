@@ -10,7 +10,8 @@ message pakiet {
 		COMMAND = 1;
 		FTPDOWNLOAD = 2;
 		EXIT = 3;
-        RUNTESTS = 4;
-        GETRESULTS = 5;
+        BUILD = 4;
+        RUNTESTS = 5;
+        GETRESULTS = 6;
 		}
 	}

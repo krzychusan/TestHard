@@ -55,12 +55,12 @@ class serverworker(Thread):
         self.ftpDownloaded = True
 
         self.data = pakiet()
-        self.data.typ = pakiet.RUNTESTS
+        self.data.typ = pakiet.BUILD
         self.data.msg = 'ls'
         self.buffer.send(self.data)
 
         self.data = self.buffer.read()
-        if not self.data or self.data.typ != pakiet.RUNTESTS:
+        if not self.data or self.data.typ != pakiet.BUILD:
             print 'Blad podczas wykonywania testow'
             #self.close()
             #return
