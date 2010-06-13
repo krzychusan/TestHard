@@ -21,7 +21,9 @@ c.execute('''
 		comment TEXT,
 		type TEXT,
 		login TEXT,
-		password TEXT
+		password TEXT,
+        test_cmds TEXT,
+        test_results TEXT,
 	)
 ''')
 conn.commit()
