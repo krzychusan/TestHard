@@ -29,6 +29,14 @@ _PAKIET_TYPE = descriptor.EnumDescriptor(
       name='EXIT', index=3, number=3,
       options=None,
       type=None),
+    descriptor.EnumValueDescriptor(
+      name='RUNTESTS', index=4, number=4,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='GETRESULTS', index=5, number=5,
+      options=None,
+      type=None),
   ],
   options=None,
 )
