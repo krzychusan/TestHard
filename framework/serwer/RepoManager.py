@@ -36,13 +36,13 @@ class RepoManager:
         RepoManager.repList.append(rep)
 
     def getRepositories(self):
-        ls = []
-        for a in db.getRepositories():
-            ls.append(self.convertRepository(a))
-        return ls
+        return [self.convertRepository(a) for a in db.getRepositories()]
 
     def getRepositoriesTypes(self):
         return RepoManager.repTypes
     
     def getRepository(self, nazwa):
-        pass
+        return db.getRepositoryByName(nazwa)[0]
+
+    def removeRepository(self, nazwa):
+        db.removeRepository(nazwa)

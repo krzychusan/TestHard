@@ -1,17 +1,8 @@
 
 <%inherit file="/szablon.mako"/>\
 
-<h2> Repositories </h2>
+<h2> Detailed info ${c.info.name}</h2>
 
-<table border="1">
-<tr>
-    <th>No.</th>
-    <th>Name</th>
-    <th>Url</th>
-    <th>Type</th>
-    <th>Auth</th>
-    <th>remove</th>
-</tr>
 % if c.repos:
     % for rep in c.repos:
     <tr>
@@ -24,6 +15,6 @@
     </tr>
     % endfor
 %endif
-</table>
 
-${h.link_to('Add', url('/repository/add'))}
+${h.link_to('Return', url('/repository'))}
+

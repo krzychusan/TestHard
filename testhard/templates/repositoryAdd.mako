@@ -45,23 +45,30 @@
 </div>
 
 <div class="fieldwrapper">
-    <label for="test_cmds" class="styled">Test commands:</label>
+    <label for="build_cmd" class="styled">Build commands:</label>
     <div class="thefield">
-        <textarea name="test_cmds" id="cmds"></textarea>
+        <textarea name="build_cmd" id="build_cmd"></textarea>
     </div>
 </div>
 
 <div class="fieldwrapper">
-    <label for="results" class="styled">Test output path:</label>
+    <label for="find_tests" class="styled">Find tests command:</label>
     <div class="thefield">
-        <textarea name="test_results" id="results"></textarea>
+        <textarea name="find_tests" id="find_tests"></textarea>
     </div>
 </div>
 
 <div class="fieldwrapper">
-    <label for="about" class="styled">Comment:</label>
+    <label for="run_test" class="styled">Run test command:</label>
     <div class="thefield">
-        <textarea name="comment" id="about"></textarea>
+        <textarea name="run_test" id="run_test"></textarea>
+    </div>
+</div>
+
+<div class="fieldwrapper">
+    <label for="comment" class="styled">Comment:</label>
+    <div class="thefield">
+        <textarea name="comment" id="comment"></textarea>
 </div>
 </div>
 

@@ -27,6 +27,11 @@ class RepositoryController(BaseController):
         c.repTypes = [it() for it in c.repTypes]
         return render('/repositoryAdd.mako')
     
+    def info(self):
+        name = request.params['name']
+        c.info = RepoManager().getRepository(name)
+        return render('/repositoryInfo.mako')
+
     def doAdd(self):
         con = RepoManager()
         added = IRepository()
@@ -34,11 +39,14 @@ class RepositoryController(BaseController):
         added.assign(request.params['name'], request.params['url'], request.params['comment'], request.params['type'])
         if request.params['login']:
             added.setAuth(request.params['login'], request.params['password'])
-        added.setTestAttributes(request.params['build_cmd'], request.params['find_tests_cmd'], request.params['run_test_cmd'])
+        added.setTestAttributes(request.params['build_cmd'], request.params['find_tests'], request.params['run_test'])
         con.addRepository(added)
         c.message = 'Pomyslnie dodano repozytorium %s ' % request.params['name']
-        c.ret = '/repository'
+        c.link = '/repository'
         return render('/message.mako')
 
     def remove(self):
-        return 'usuwam'
+        RepoManager().removeRepository(request.params['name'])
+        c.link = '/repository'
+        c.message = 'Pomyslnie skasowano repozytorium %s ' % request.params['name']
+        return render('/message.mako')

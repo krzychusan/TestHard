@@ -43,13 +43,22 @@ def getRepositoryByName(name):
             run_test_cmd
         from repositories
         where name=?
-    ''', name)
+    ''', (name,))
     repoList = []
     for row in cur:
         repoList.append(setUpRepositoryObject(row))
     conn.close()
     return repoList
-        
+ 
+def removeRepository(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        delete from repositories 
+        where name=?
+        ''', (name,))
+    conn.commit()
+    conn.close()
 
 def getRepositories():
     conn = connect()

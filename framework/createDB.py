@@ -37,7 +37,7 @@ c.execute("""
         'asfer',
         'svn',
         'krzychusan',
-        '5120045',
+        '5120045'
     )
 """)
 
