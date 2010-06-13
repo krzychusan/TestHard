@@ -31,6 +31,7 @@ class RepositoryController(BaseController):
         added.assign(request.params['name'], request.params['url'], request.params['comment'], request.params['type'])
         if request.params['login']:
             added.setAuth(request.params['login'], request.params['password'])
+        added.setTestAttributes(request.params['test_cmds'], request.params['test_results'])
         con.addRepository(added)
         c.message = 'Pomyslnie dodano repozytorium %s ' % request.params['name']
         c.ret = '/repository'

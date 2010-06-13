@@ -23,7 +23,7 @@ c.execute('''
 		login TEXT,
 		password TEXT,
         test_cmds TEXT,
-        test_results TEXT,
+        test_results TEXT
 	)
 ''')
 conn.commit()
