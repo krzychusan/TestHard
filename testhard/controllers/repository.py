@@ -5,20 +5,23 @@ from pylons.controllers.util import abort, redirect_to
 
 from testhard.lib.base import BaseController, render
 
+import framework.RepoManager
+import framework.IRepository
+
 log = logging.getLogger(__name__)
 
 class RepositoryController(BaseController):
 
     def index(self):
         # Return a rendered template
-        con = RepoManager()
+        con = framework.RepoManager.RepoManager()
         c.repos = con.getRepositories()
         return render('/repository.mako')
 
     def add(self):
-        import framework.plugins.load_rep
-        con = RepoManager()
+        con = framework.RepoManager.RepoManager()
         c.repTypes = con.getRepositoriesTypes()
+        c.repTypes = [it() for it in c.repTypes]
         return render('/repositoryAdd.mako')
     
     def doAdd(self):

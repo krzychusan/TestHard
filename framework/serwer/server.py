@@ -31,7 +31,7 @@ class server:
 		self.svn = repo.svn.svn()
 		if self.svnauth:
 			self.svn.setLogin(self.authLogin, self.authPassword)
-                self.ftp = ftpServer.ftpServer(self.path)
+                self.ftp = ftpServer.ftpServer(self.path, 2222)
 
 	def start(self):
 		if self.svndownload:
