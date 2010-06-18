@@ -44,7 +44,7 @@ def getTasks():
     cur.execute('''
         select
             name,
-            time(test_time),
+            test_time,
             comment,
             email,
             repository
