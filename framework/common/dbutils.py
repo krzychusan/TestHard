@@ -36,6 +36,14 @@ def setUpRepositoryObject(row):
     repo.setTestAttributes(row[6], row[7], row[8])
     return repo
 
+def removeTask(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        delete from tasks
+        where name = ?
+    ''',(name,))
+
 def addTask(values):
     conn = connect()
     cur = conn.cursor()
