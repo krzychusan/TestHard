@@ -23,7 +23,7 @@
 <div class="fieldwrapper">
     <label for="repository" class="styled">Repository:</label>
     <div class="thefield">
-        <select name="repository" id="repo">
+        <select name="repo" id="repo">
         % for typ in c.repTypes:
             <option value="${typ.name}">${typ.name}</option>
         % endfor

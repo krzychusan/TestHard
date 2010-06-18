@@ -5,18 +5,14 @@ import sys
 dbname = 'common/testHard.db'
 
 if os.path.exists(dbname):
-	print 'Database is already created.'
-	sys.exit()
-
-#with open('dbname', 'w'):
-#	pass
+    os.remove(dbname)
 
 conn = sqlite3.connect(dbname)
 c = conn.cursor()
 c.execute('''
 	create table repositories (
 		id INTEGER PRIMARY KEY,
-		name TEXT,
+		name TEXT UNIQUE,
 		url TEXT,
 		comment TEXT,
 		type TEXT,
@@ -27,6 +23,18 @@ c.execute('''
         run_test_cmd TEXT
 	)
 ''')
+
+c.execute('''
+    create table tasks (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        repository TEXT,
+        test_time DATETIME,
+        email TEXT,
+        comment TEXT
+    )
+''')
+
 
 c.execute("""
     insert into repositories 

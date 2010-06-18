@@ -21,7 +21,7 @@ class RunController(BaseController):
     def addRun(self):
         con = TasksManager()
         res = con.addTest(request.params['name'], request.params['repo'], 
-                    request.params['date'], request.params['email'],
+                    request.params['timestamp'], request.params['email'],
                     request.params['comment'])
 
         if res:
