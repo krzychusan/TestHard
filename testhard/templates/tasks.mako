@@ -21,7 +21,7 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
         <td>${rep.url}</td>
         <td>${rep.typ}</td>
         <td>${rep.Auth}</td>
-        <td><a href="/repository/remove?name=${rep.name}">remove</a></td>
+        <td><a href="/tasks/remove?name=${rep.name}">remove</a></td>
     </tr>
     % endfor
 %endif

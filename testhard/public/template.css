@@ -271,5 +271,9 @@ html {
     border-top: 1px solid #000;
 }
 
-
-
+#yui-main a { color:gray;
+ font-weight:bold;
+ text-decoration:none;
+}
+#yui-main a:hover { text-decoration:underline;
+}

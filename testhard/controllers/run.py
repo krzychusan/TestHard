@@ -24,6 +24,7 @@ class RunController(BaseController):
                     request.params['timestamp'], request.params['email'],
                     request.params['comment'])
 
+        c.link = '/tasks'
         if res:
             c.message = 'Nowe zadanie %s dodane pomyslnie. ' % request.params['name']
             return render('/message.mako')
