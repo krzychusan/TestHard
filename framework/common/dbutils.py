@@ -8,6 +8,15 @@ dbname = path + '/testHard.db'
 def connect():
 	return sqlite3.connect(dbname)
 
+def getCount(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select count(*) from
+    ''' + name)
+    for row in cur:
+        return row[0]
+
 def addRepository(values):
     conn = connect()
     cur = conn.cursor()

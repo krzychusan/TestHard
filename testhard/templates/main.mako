@@ -10,9 +10,9 @@ TestHard is a distributed testing framework written in python. It uses Pylons as
 <p>
 <h2> Statistics</h2>
 Scheduled tests:<br>
-123
-321<br>
+${ c.taskCount }
+<br>
 Repositories:<br>
-156
-31<br>
+${ c.repCount }
+<br>
 </p>
