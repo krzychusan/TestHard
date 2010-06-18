@@ -27,6 +27,41 @@ def setUpRepositoryObject(row):
     repo.setTestAttributes(row[6], row[7], row[8])
     return repo
 
+def addTask(values):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        insert into tasks 
+        (name, test_time, comment, email, repository) 
+        values (?, ?, ?, ?, ?)
+    ''', values)
+    conn.commit()
+    conn.close()
+
+def getTasks():
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select
+            name,
+            time(test_time),
+            comment,
+            email,
+            repository
+        from tasks
+    ''')
+    tasksList = []
+    for row in cur:
+        tasksList.append( {
+            'name' : row[0],
+            'test_time' : row[1],
+            'comment' : row[2],
+            'email' : row[3],
+            'repository' : row[4]
+        } )
+    conn.close()
+    return tasksDict
+
 def getRepositoryByName(name):
     conn = connect()
     cur = conn.cursor()

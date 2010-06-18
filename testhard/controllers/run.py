@@ -15,5 +15,4 @@ class RunController(BaseController):
     def index(self):
         con = RepoManager()
         c.repTypes = con.getRepositories()
-        return render('/run.mako')
-    
+        return render('/run.mako') 

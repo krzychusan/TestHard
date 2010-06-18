@@ -28,6 +28,8 @@ class RepoManager:
                 converted.assign(toConvert.name, toConvert.url, toConvert.comment, toConvert.typ)
                 if toConvert.Auth:
                     converted.setAuth(toConvert.login, toConvert.password)
+                converted.setTestAttributes(toConvert.build_cmd, toConvert.find_tests_cmd, 
+                        toConvert.run_test_cmd)
             return converted
         return None
 
