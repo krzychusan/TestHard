@@ -9,4 +9,4 @@ class TasksManager:
         return True
 
     def getTasks(self):
-        return getTasks()
+        return db.getTasks()

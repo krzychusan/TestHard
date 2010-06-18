@@ -50,9 +50,9 @@ def getTasks():
             repository
         from tasks
     ''')
-    tasksList = []
+    tasksDict = []
     for row in cur:
-        tasksList.append( {
+        tasksDict.append( {
             'name' : row[0],
             'test_time' : row[1],
             'comment' : row[2],
