@@ -6,6 +6,8 @@ from common.datapakiet_pb2 import pakiet
 from common.bufor import bufor
 from common.utils import log
 
+from parsers.ant_junit import AntJUnitParser
+
 class serverworker(Thread):
 
     def __init__(self, ip, port, server):
@@ -36,10 +38,8 @@ class serverworker(Thread):
             self.close()
             return
         
-        print 'WYNIKI TESTOW'
-        print '/-------------\\'
-        print self.data.msg
-        print '\\-------------/'
+        results = AntJUnitParser(self.data.msg)
+        return results
 
     def run(self):
         #Send ping
@@ -73,7 +73,7 @@ class serverworker(Thread):
 
         self.data = pakiet()
         self.data.typ = pakiet.BUILD
-        self.data.msg = 'ls'
+        self.data.msg = 'ant compile'
         self.buffer.send(self.data)
 
         self.data = self.buffer.read()
@@ -82,11 +82,12 @@ class serverworker(Thread):
             #self.close()
             #return
 
-        self._test('ls -1')
-        self._test('cat kotek')
-        self._test('cat /etc/passwd | grep root')
-
-        print 'Wykonano testy', self.data.msg
+        results = self._test('ant test')
+        print 'WYNIKI TESTOW'
+        print 'ILE: %d FAILURES: %d, ERRORS: %d LOG:' % (results.tests_count, results.failures, results.errors)
+        print '/-------------\\'
+        print results.log
+        print '\\-------------/'
 
         self.server.workersLock.acquire()
         self.server.workersDone -= 1

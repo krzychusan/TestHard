@@ -11,10 +11,10 @@ class worker:
         self.host = 'localhost'
         self.port = 11111
         self.path = './ssvn'
+        os.chdir(self.path)
         #END
 
     def _compile(self):
-        print 'ZIEMIA!'
         script_cmds = self.data.msg.split('\n')
         for cmd in script_cmds:
             r = [0, 0, 0]
@@ -75,7 +75,6 @@ class worker:
                 self.data.msg = 'pong'
                 self.buffer.send(self.data)
             elif self.data.typ == pakiet.FTPDOWNLOAD:
-                print 'SIEMA!'
                 self.ftp.download((self.data.msg, self.data.port), self.path)
                 self.data = pakiet()
                 self.data.typ = pakiet.FTPDOWNLOAD
