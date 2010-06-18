@@ -8,20 +8,29 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
 <tr>
     <th>No.</th>
     <th>Name</th>
-    <th>Repository</th>
     <th>Date</th>
     <th>E-mail</th>
+    <th>Repository</th>
     <th>Result</th>
 </tr>
 % if c.tasks:
     % for task in c.tasks:
     <tr>
         <td>${c.tasks.index(task)}</td>
+<<<<<<< HEAD
         <td>${task.name}</td>
         <td>${rep.url}</td>
         <td>${rep.typ}</td>
         <td>${rep.Auth}</td>
         <td><a href="/tasks/remove?name=${rep.name}">remove</a></td>
+=======
+        <td>${task['name']}</td>
+        <td>${task['test_time']}</td>
+        <td>${task['email']}</td>
+        <td>${task['repository']}</td>
+        <td>${'temporops'}</td>
+        <td><a href="/repository/remove?name=">remove</a></td>
+>>>>>>> 2b49d708fed69d51ea527effa6eaced923ed8544
     </tr>
     % endfor
 %endif
