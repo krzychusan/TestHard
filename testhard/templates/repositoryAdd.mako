@@ -45,6 +45,14 @@
 </div>
 
 <div class="fieldwrapper">
+    <label for="compile" class="styled">Build on main server?:</label>
+    <div class="thefield">
+        <input type="checkbox" name="compile" id="compile" />
+    </div>
+</div>
+
+
+<div class="fieldwrapper">
     <label for="build_cmd" class="styled">Build commands:</label>
     <div class="thefield">
         <textarea name="build_cmd" id="build_cmd"></textarea>

@@ -3,7 +3,9 @@
 
 <h2> Tasks </h2>
 
-${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to('Unfinished', url('/'))}
+${h.link_to('ALL', url('/tasks?sort=ALL'))} - 
+${h.link_to('Finished', url('/tasks?sort=F'))} - 
+${h.link_to('Unfinished', url('/tasks?sort=U'))}
 <table border="1">
 <tr>
     <th>No.</th>
@@ -23,14 +25,12 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
         <td>${task['email']}</td>
         <td>${task['repository']}</td>
         <td><a href="/tasks/showRaport?name=${task['name']}">
-        % if task['failures_count']:
+        % if task['failures_count'] is not None:
             %if int(task['failures_count']) > 0:
-                <p style="color:red">Failed</p>
+                <font color="red">Failed</font>
             %else:
-                <p style="color:green">OK</p>
+                <font color="green">OK</font>
             %endif
-        % else:
-            <p style="color:gray">None</p>
         % endif
         </a>
         </td>

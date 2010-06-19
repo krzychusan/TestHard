@@ -31,6 +31,7 @@ class RepoManager:
                     converted.setAuth(toConvert.login, toConvert.password)
                 converted.setTestAttributes(toConvert.build_cmd, toConvert.find_tests_cmd, 
                         toConvert.run_test_cmd)
+                converted.compileOnServer = toConvert.compileOnServer
             return converted
         return None
 

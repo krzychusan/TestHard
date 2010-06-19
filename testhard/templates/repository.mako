@@ -10,7 +10,7 @@
     <th>Url</th>
     <th>Type</th>
     <th>Auth</th>
-    <th>remove</th>
+    <th></th>
 </tr>
 % if c.repos:
     % for rep in c.repos:

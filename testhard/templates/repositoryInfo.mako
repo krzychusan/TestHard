@@ -15,6 +15,8 @@
 <h4>Comment:</h4>
 ${c.info.comment}<br><br>
 
+<h4>Build on server?:</h4>
+${c.info.compileOnServer}<br><br>
 <h4>Build commands:</h4>
 ${c.info.build_cmd}<br><br>
 

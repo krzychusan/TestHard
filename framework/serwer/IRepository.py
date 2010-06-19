@@ -6,6 +6,7 @@ class IRepository(object):
         self.name = ''
         self.url = ''
         self.Auth = False
+        self.compileOnServer = False
         self.login = ''
         self.password = ''
         self.typ = 'Interface'
@@ -33,4 +34,4 @@ class IRepository(object):
     def getValuesTuple(self):
         return ( self.name, self.url, self.comment, 
 	    self.typ, self.login, self.password, self.build_cmd,
-        self.find_tests_cmd, self.run_test_cmd )
+        self.find_tests_cmd, self.run_test_cmd, self.compileOnServer )
