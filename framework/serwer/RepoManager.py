@@ -35,7 +35,6 @@ class RepoManager:
 
     def addRepository(self, rep):
         db.addRepository(rep.getValuesTuple())
-        RepoManager.repList.append(rep)
 
     def getRepositories(self):
         return [self.convertRepository(a) for a in db.getRepositories()]
@@ -44,7 +43,14 @@ class RepoManager:
         return RepoManager.repTypes
     
     def getRepository(self, nazwa):
-        return db.getRepositoryByName(nazwa)[0]
+        return self.convertRepository(db.getRepositoryByName(nazwa)[0])
+
+    def updateRepository(self, repo, oldName):
+        return db.updateRepository(oldName, repo.getValuesTuple())
 
     def removeRepository(self, nazwa):
         db.removeRepository(nazwa)
+
+    def addResult(self, task_name, failures_count, errors_count, test_count, log):
+        db.addResult((db.taskId(task_name), failures_count, errors_count, test_count, log))
+

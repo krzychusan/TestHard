@@ -8,6 +8,20 @@ dbname = path + '/testHard.db'
 def connect():
 	return sqlite3.connect(dbname)
 
+def taskId(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute("""
+        select id from tasks
+        where name = ?
+    """,(name,))
+    for row in cur:
+        conn.close()
+        return row[0]
+    conn.close()
+    return None
+
+
 def getCount(name):
     conn = connect()
     cur = conn.cursor()
@@ -18,6 +32,32 @@ def getCount(name):
         conn.close()
         return row[0]
     conn.close()
+
+def updateRepository(oldName, values):
+    conn = connect()
+    cur = conn.cursor()
+    if oldName != values[0] and len(getRepositoryByName(values[0])) != 0:
+        return False
+
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute("""
+        update repositories
+        set
+            name = ?,
+            url = ?,
+            comment = ?,
+            type = ?,
+            login = ?,
+            password = ?,
+            build_cmd = ?,
+            find_tests_cmd = ?,
+            run_test_cmd = ?
+        where name = ?
+    """, values + (oldName,))
+    conn.commit()
+    conn.close()
+    return True
 
 def addRepository(values):
     conn = connect()
@@ -54,6 +94,17 @@ def addTask(values):
     cur.execute('''
         insert into tasks 
         (name, test_time, comment, email, repository) 
+        values (?, ?, ?, ?, ?)
+    ''', values)
+    conn.commit()
+    conn.close()
+
+def addResult(values):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        insert into results
+        (task, failures_count, errors_count, tests_count, log)
         values (?, ?, ?, ?, ?)
     ''', values)
     conn.commit()

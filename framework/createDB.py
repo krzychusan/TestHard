@@ -36,10 +36,21 @@ c.execute('''
 ''')
 
 c.execute('''
-   create table tests (
-        id INTEGER PRIMARY KEY
+   create table results (
+        id INTEGER PRIMARY KEY,
+        task INTEGER,
+        tests_count INTEGER,
+        failures_count INTEGER,
+        errors_count INTEGER,
+        log TEXT
    )
 ''')
+
+c.execute("""
+    insert into results
+    (task, tests_count, failures_count, errors_count, log)
+    values (1, 26, 3, 23, 'log fwed e qoqif wr')
+""")
 
 c.execute("""
     insert into repositories 
