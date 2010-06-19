@@ -40,6 +40,8 @@ class RepositoryController(BaseController):
         if request.params['login']:
             added.setAuth(request.params['login'], request.params['password'])
         added.setTestAttributes(request.params['build_cmd'], request.params['find_tests'], request.params['run_test'])
+        if request.params['compile'] == 'on':
+            added.compileOnServer = True
         con.addRepository(added)
         c.message = 'Pomyslnie dodano repozytorium %s ' % request.params['name']
         c.link = '/repository'

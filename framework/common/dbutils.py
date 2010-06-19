@@ -111,8 +111,8 @@ def addRepository(values):
     cur = conn.cursor()
     cur.execute('''
         insert into repositories
-        (name, url, comment, type, login, password, build_cmd, find_tests_cmd, run_test_cmd)
-        values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (name, url, comment, type, login, password, build_cmd, find_tests_cmd, run_test_cmd, compile_on_server)
+        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', values)
     conn.commit()
     conn.close()
@@ -123,6 +123,8 @@ def setUpRepositoryObject(row):
     if row[4] and len(row[4]) > 0:
         repo.setAuth(row[4], row[5])
     repo.setTestAttributes(row[6], row[7], row[8])
+    if row[9] == 1:
+        repo.compileOnServer = True
     return repo
 
 def removeTask(name):
@@ -240,7 +242,8 @@ def getRepositoryByName(name):
             password,
             build_cmd,
             find_tests_cmd,
-            run_test_cmd
+            run_test_cmd,
+            compile_on_server
         from repositories
         where name=?
     ''', (name,))
@@ -273,7 +276,8 @@ def getRepositories():
             password,
             build_cmd,
             find_tests_cmd,
-            run_test_cmd
+            run_test_cmd,
+            compile_on_server
         from repositories 
     ''')
     repoList = []

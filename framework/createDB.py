@@ -20,7 +20,8 @@ c.execute('''
 		password TEXT,
         build_cmd TEXT,
         find_tests_cmd TEXT,
-        run_test_cmd TEXT
+        run_test_cmd TEXT,
+        compile_on_server BOOLEAN
 	)
 ''')
 
