@@ -35,6 +35,11 @@ c.execute('''
     )
 ''')
 
+c.execute('''
+   create table tests (
+        id INTEGER PRIMARY KEY
+   )
+''')
 
 c.execute("""
     insert into repositories 
@@ -47,6 +52,28 @@ c.execute("""
         'krzychusan',
         '5120045'
     )
+""")
+
+c.execute("""
+   insert into repositories
+   (name, url, comment, type)
+   values (
+        'TestHard',
+        'svn://svnhub.com/krzychusan/TestHard.svn',
+        'TestHard read-only repository',
+        'svn'
+   )
+""")
+
+c.execute("""
+   insert into tasks
+   (name, test_time, email, repository)
+   values (
+        'SimpleCheck',
+        '12-01-2011 00:45:00',
+        'admin@tomaszow.com',
+        'abcd'
+   )
 """)
 
 conn.commit()

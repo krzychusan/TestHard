@@ -33,7 +33,7 @@ def addRepository(values):
 def setUpRepositoryObject(row):
     repo = IRepository()
     repo.assign(row[0], row[1], row[2], row[3])
-    if len(row[4]) > 0:
+    if row[4] and len(row[4]) > 0:
         repo.setAuth(row[4], row[5])
     repo.setTestAttributes(row[6], row[7], row[8])
     return repo
