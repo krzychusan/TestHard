@@ -22,7 +22,15 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
         <td>${task['test_time']}</td>
         <td>${task['email']}</td>
         <td>${task['repository']}</td>
-        <td>${'temporops'}</td>
+        % if task['failures_count']:
+            %if int(task['failures_count']) > 0:
+                <td>Failed</td>
+            %else:
+                <td>OK</td>
+            %endif
+        % else:
+            <td>None</td>
+        % endif
         <td><a href="/tasks/remove?name=${task['name']}">remove</a></td>
     </tr>
     % endfor
