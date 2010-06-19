@@ -24,7 +24,7 @@ class ftpServer(Thread):
 
 		self.handler = ftpserver.FTPHandler
 		self.handler.authorizer = self.authorize
-		self.ftp = ftpserver.FTPServer(('127.0.0.1', self.port), self.handler)
+		self.ftp = ftpserver.FTPServer(('', self.port), self.handler)
 		
                 log('FTP launched on port '+str(self.port)+'.')
                 self.ftp.serve_forever()
