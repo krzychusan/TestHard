@@ -8,6 +8,9 @@ class TasksManager:
         db.addTask((name, date, comment, email, repo))
         return True
 
+    def getTask(self, name):
+        return db.getTaskByName(name)
+
     def getTasks(self):
         return db.getTasks()
 
