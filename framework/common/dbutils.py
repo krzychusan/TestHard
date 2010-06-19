@@ -57,7 +57,22 @@ def updateRepository(oldName, values):
     """, values + (oldName,))
     conn.commit()
     conn.close()
+    updateTasks(oldName, values[0])
     return True
+
+def updateTasks(oldName, newName):
+    conn = connect()
+    cur = conn.cursor()
+    
+    cur.execute("""
+        update tasks
+        set 
+            repository = ?
+        where repository = ?
+    """, (newName, oldName))
+    
+    conn.commit()
+    conn.close()
 
 def addRepository(values):
     conn = connect()
