@@ -15,7 +15,9 @@ def getCount(name):
         select count(*) from
     ''' + name)
     for row in cur:
+        conn.close()
         return row[0]
+    conn.close()
 
 def addRepository(values):
     conn = connect()
@@ -43,6 +45,8 @@ def removeTask(name):
         delete from tasks
         where name = ?
     ''',(name,))
+    conn.commit()
+    conn.close()
 
 def addTask(values):
     conn = connect()
