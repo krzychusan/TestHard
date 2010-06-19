@@ -5,13 +5,13 @@ class bufor:
     def __init__(self, sock):
         self.socket = sock
 
-def _recv(self, size):
+    def _recv(self, size):
         b = ""
         left = size
         while left > 0:
-        tmp = self.socket.recv(left)
-        left -= len(tmp)
-        b += tmp 
+            tmp = self.socket.recv(left)
+            left -= len(tmp)
+            b += tmp 
         return b
 
     def read(self):
