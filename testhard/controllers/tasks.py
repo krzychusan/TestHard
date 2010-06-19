@@ -15,6 +15,7 @@ class TasksController(BaseController):
     def index(self):
         tm = TasksManager()
         c.tasks = tm.getTasks()
+        sort = 'ALL'
         if 'sort' in request.params:
             sort = request.params['sort']
         if sort == 'F':
