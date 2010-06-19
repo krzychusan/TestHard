@@ -1,6 +1,7 @@
 import logging
 
 from serwer.TasksManager import TasksManager
+from serwer.RepoManager import RepoManager
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -19,6 +20,8 @@ class TasksController(BaseController):
     def info(self):
         tm = TasksManager()
         c.task = tm.getTask(request.params['name'])
+        rm = RepoManager()
+        c.info = rm.getRepository(c.task['repository'])
         return render('/taskInfo.mako')
     
     def showRaport(self):
