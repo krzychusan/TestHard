@@ -10,7 +10,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.getcwd()))
 from RepoManager import *
 
-import RepoManager
+#import RepoManager
 import ftpServer
 import serverworker
 from common.utils import log
@@ -142,7 +142,8 @@ if __name__ == '__main__':
         rep.svnauth = True #czy wymagana autoryzacja do svna
         #rep.find_tests_cmd = 'for i in `seq 1 100`; do echo $i; done'
         rep.find_tests_cmd = 'find . -iname "*test*class"'
-        rep.run_test_cmd = 'echo "[junit] Tests run: 1, Failures: 1, Errors: 1, Time elapsed: 1.1 sec $$"'
+        #rep.run_test_cmd = 'echo "[junit] Tests run: 1, Failures: 1, Errors: 1, Time elapsed: 1.1 sec $$"'
+        rep.run_test_cmd = 'ant test'
         rep.auth = True
         rep.build_cmd = 'ant compile'
         rep.authLogin = 'krzychusan' #dane do autoryzacji do svna
@@ -150,8 +151,9 @@ if __name__ == '__main__':
     else:
         repo_name = sys.argv[1]
         manager = RepoManager()
-        raw_rep = manager.getRepository(repo_name)
-        if not raw_rep:
+        try:
+            raw_rep = manager.getRepository(repo_name)
+        except IndexError:
             print 'Nie ma repozytorium o podanej nazwie.'
             sys.exit(-1)
         rep = manager.convertRepository(raw_rep)
