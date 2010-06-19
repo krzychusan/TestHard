@@ -18,8 +18,8 @@ class TasksController(BaseController):
 
     def info(self):
         tm = TasksManager()
-        c.name = request.params['name']
-        return render('/tasksInfo.mako')
+        c.task = tm.getTask(request.params['name'])
+        return render('/taskInfo.mako')
     
     def showRaport(self):
         tm = TasksManager()
