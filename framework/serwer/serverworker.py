@@ -37,7 +37,8 @@ class serverworker(Thread):
             print 'Blad w wykonywaniu testow!', self.data.msg
             self.close()
             return
-        
+ 
+        print 'RETURNED', self.data.msg
         results = AntJUnitParser(self.data.msg)
         return results
 
@@ -70,6 +71,7 @@ class serverworker(Thread):
             return
         
         self.ftpDownloaded = True
+        log('Worker '+self.ip[:-1]+' pobral FTP')
 
         self.data = pakiet()
         self.data.typ = pakiet.BUILD
@@ -78,25 +80,30 @@ class serverworker(Thread):
 
         self.data = self.buffer.read()
         if not self.data or self.data.typ != pakiet.BUILD:
-            print 'Blad podczas budowania'
+            log('Blad podczas budowania')
             #self.close()
             #return
 
-        results = self._test('ant test')
-        print 'WYNIKI TESTOW'
-        print 'ILE: %d FAILURES: %d, ERRORS: %d LOG:' % (results.tests_count, results.failures, results.errors)
-        print '/-------------\\'
-        print results.log
-        print '\\-------------/'
+        while True:
+            self.server.workersLock.acquire()
+            if len(self.server.jobs) > 0:
+                job = self.server.jobs[0]
+                self.server.jobs = self.server.jobs[1:]
+            else:
+                self.server.workersLock.release()
+                self.server.serverCond.acquire()
+                self.server.serverCond.notify()
+                self.server.serverCond.release()
+                break
+            self.server.workersLock.release()
 
-        self.server.workersLock.acquire()
-        self.server.workersDone -= 1
-        if self.server.workersDone == 0:
-            self.server.serverCond.acquire()
-            self.server.serverCond.notify()
-            self.server.serverCond.release()
-        self.server.workersLock.release()
-        log('Worker '+self.ip[:-1]+' pobral FTP')
+            results = self._test(job)
+            print 'WYNIKI TESTOW'
+            print 'ILE: %d FAILURES: %d, ERRORS: %d LOG:' % (results.tests_count, results.failures, results.errors)
+            print '/-------------\\'
+            print results.log
+            print '\\-------------/'
+
 
         #koniec pracy
         self.data = pakiet()
