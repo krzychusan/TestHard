@@ -8,6 +8,17 @@ dbname = path + '/testHard.db'
 def connect():
 	return sqlite3.connect(dbname)
 
+def getCount(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select count(*) from
+    ''' + name)
+    for row in cur:
+        conn.close()
+        return row[0]
+    conn.close()
+
 def addRepository(values):
     conn = connect()
     cur = conn.cursor()
@@ -22,10 +33,20 @@ def addRepository(values):
 def setUpRepositoryObject(row):
     repo = IRepository()
     repo.assign(row[0], row[1], row[2], row[3])
-    if len(row[4]) > 0:
+    if row[4] and len(row[4]) > 0:
         repo.setAuth(row[4], row[5])
     repo.setTestAttributes(row[6], row[7], row[8])
     return repo
+
+def removeTask(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        delete from tasks
+        where name = ?
+    ''',(name,))
+    conn.commit()
+    conn.close()
 
 def addTask(values):
     conn = connect()

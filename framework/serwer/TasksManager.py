@@ -10,3 +10,7 @@ class TasksManager:
 
     def getTasks(self):
         return db.getTasks()
+
+    def removeTask(self, name):
+        db.removeTask(name)
+        return True

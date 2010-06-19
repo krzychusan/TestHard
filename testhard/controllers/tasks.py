@@ -18,4 +18,10 @@ class TasksController(BaseController):
 
     def showRaport(self):
         pass
-
+    
+    def remove(self):
+        tm = TasksManager()
+        tm.removeTask(request.params['name'])
+        c.link = '/tasks'
+        c.message = 'Pomyslnie skasowano zadanie: ' + request.params['name']
+        return render('message.mako')

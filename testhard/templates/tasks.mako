@@ -23,7 +23,7 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
         <td>${task['email']}</td>
         <td>${task['repository']}</td>
         <td>${'temporops'}</td>
-        <td><a href="/repository/remove?name=">remove</a></td>
+        <td><a href="/tasks/remove?name=${task['name']}">remove</a></td>
     </tr>
     % endfor
 %endif
