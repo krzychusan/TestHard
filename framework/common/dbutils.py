@@ -33,6 +33,38 @@ def getCount(name):
         return row[0]
     conn.close()
 
+def getUnfinishedTasks():
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select
+            name,
+            test_time,
+            comment,
+            email,
+            repository,
+            failures_count,
+            errors_count,
+            tests_count,
+            log,
+            time_elapsed,
+            timestamp
+        from tasks as ts 
+        left outer join results 
+        on ts.id = task
+        where timestamp = NULL
+        order by test_time 
+        limit 1
+    ''')
+    tasksDict = []
+    for row in cur:
+        tasksDict.append( 
+           setUpTask(row)
+        )
+    conn.close()
+    return tasksDict
+
+
 def updateRepository(oldName, values):
     conn = connect()
     cur = conn.cursor()
@@ -119,8 +151,8 @@ def addResult(values):
     cur = conn.cursor()
     cur.execute('''
         insert into results
-        (task, failures_count, errors_count, tests_count, log)
-        values (?, ?, ?, ?, ?)
+        (timestamp, task, failures_count, errors_count, tests_count, log, time_elapsed)
+        values (datetime('now','localtime'), ?, ?, ?, ?, ?, ?)
     ''', values)
     conn.commit()
     conn.close()
@@ -135,7 +167,9 @@ def setUpTask(row):
         'failures_count' : row[5],
         'errors_count' : row[6],
         'tests_count' : row[7],
-        'log' : row[8]
+        'log' : row[8],
+        'time_elapsed' : row[9],
+        'timestamp' : row[10]
      }
 
 def getTasks():
@@ -151,7 +185,9 @@ def getTasks():
             failures_count,
             errors_count,
             tests_count,
-            log
+            log,
+            time_elapsed,
+            timestamp
         from tasks as ts 
         left outer join results 
         on ts.id = task
@@ -177,7 +213,9 @@ def getTaskByName(name):
             failures_count,
             errors_count,
             tests_count,
-            log
+            log,
+            time_elapsed,
+            timestamp
         from tasks as ts
         left outer join results 
         on ts.id = task

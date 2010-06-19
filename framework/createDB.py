@@ -42,14 +42,16 @@ c.execute('''
         tests_count INTEGER,
         failures_count INTEGER,
         errors_count INTEGER,
+        time_elapsed TEXT,
+        timestamp DATETIME,
         log TEXT
    )
 ''')
 
 c.execute("""
     insert into results
-    (task, tests_count, failures_count, errors_count, log)
-    values (1, 26, 3, 23, 'log fwed e qoqif wr')
+    (task, tests_count, failures_count, errors_count, log, time_elapsed, timestamp)
+    values (1, 26, 3, 23, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
 """)
 
 c.execute("""

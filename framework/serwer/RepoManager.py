@@ -1,5 +1,6 @@
 from serwer.IRepository import IRepository
 
+from parsers.base_parser import BaseParser
 from common.utils import log
 from copy import deepcopy
 import common.dbutils as db
@@ -51,6 +52,7 @@ class RepoManager:
     def removeRepository(self, nazwa):
         db.removeRepository(nazwa)
 
-    def addResult(self, task_name, failures_count, errors_count, test_count, log):
-        db.addResult((db.taskId(task_name), failures_count, errors_count, test_count, log))
+    def addResult(self, result):
+        db.addResult((db.taskId(task_name), result.failure, 
+            result.errors, result.test_count, result.log, result.time_elapsed))
 
