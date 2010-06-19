@@ -12,6 +12,7 @@ class bufor:
         self.dataSize = struct.unpack("H", self.size)[0]
         self.data = ''
         while len(self.data) != self.dataSize:
+            print 'paczka ', len(self.dataSize) - len(self.data)
             self.data += self.socket.recv(self.dataSize - len(self.data))
         self.ret = pakiet()
         self.ret.ParseFromString(self.data)
