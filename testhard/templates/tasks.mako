@@ -18,7 +18,7 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
     % for task in c.tasks:
     <tr>
         <td>${c.tasks.index(task)}</td>
-        <td>${task['name']}</td>
+        <td><a href="/tasks/info?name=${task['name']}">${task['name']}</a></td>
         <td>${task['test_time']}</td>
         <td>${task['email']}</td>
         <td>${task['repository']}</td>
