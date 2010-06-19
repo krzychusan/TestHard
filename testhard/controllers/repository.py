@@ -50,3 +50,24 @@ class RepositoryController(BaseController):
         c.link = '/repository'
         c.message = 'Pomyslnie skasowano repozytorium %s ' % request.params['name']
         return render('/message.mako')
+
+    def edit(self):
+        con = RepoManager()
+        c.rep = con.getRepository(request.params['name'])
+        c.repTypes = con.getRepositoriesTypes()
+        c.repTypes = [it() for it in c.repTypes]
+        return render('/repositoryEdit.mako')
+
+    def doEdit(self):
+        rep = IRepository()
+        rep.assign(request.params['name'], request.params['url'], request.params['comment'], request.params['type'])
+        if request.params['login']:
+            rep.setAuth(request.params['login'], request.params['password'])
+        rep.setTestAttributes(request.params['build_cmd'], request.params['find_tests'], request.params['run_test'])
+        if RepoManager().updateRepository(rep, request.params['old_name']):
+            c.message = 'Pomyslnie edytowano repozytorium %s .' % request.params['old_name']
+        else:
+            c.message = 'Wystapil blad podczas edycji repozytorium %s. \
+                Sprobuj ponownie pozniej, lub skontaktuj sie z administratorem.' % request.params['old_name']
+        c.link = '/repository'
+        return render('/message.mako')

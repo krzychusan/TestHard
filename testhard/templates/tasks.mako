@@ -12,6 +12,7 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
     <th>E-mail</th>
     <th>Repository</th>
     <th>Result</th>
+    <th></th>
 </tr>
 % if c.tasks:
     % for task in c.tasks:
