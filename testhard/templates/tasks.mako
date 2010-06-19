@@ -23,7 +23,7 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
         <td>${task['email']}</td>
         <td>${task['repository']}</td>
         <td><a href="/tasks/showRaport?name=${task['name']}">
-        % if task['failures_count']:
+        % if task['failures_count'] is not None:
             %if int(task['failures_count']) > 0:
                 <p style="color:red">Failed</p>
             %else:
