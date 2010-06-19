@@ -1,7 +1,7 @@
 
 <%inherit file="/szablon.mako"/>\
 
-<h2> Detailed info '${c.info.name}' [<a href="/repository/doEdit?name=${c.info.name}">edit</a>]</h2>
+<h2> Detailed info '${c.info.name}' [<a href="/repository/edit?name=${c.info.name}">edit</a>]</h2>
 
 <h4>Address:</h4> ${c.info.url}<br><br>
 <h4>Typ:</h4> ${c.info.typ}<br><br>
