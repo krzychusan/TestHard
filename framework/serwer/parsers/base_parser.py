@@ -1,6 +1,5 @@
 
 class BaseParser:
-
     def __init__(self, input):
         self.tests_count = 0
         self.failures = 0
