@@ -12,7 +12,7 @@ class serverworker(Thread):
 
     def __init__(self, ip, port, server):
         Thread.__init__(self)
-        self.ip = ip
+        self.ip = ip.rstrip('\n')
         self.port = port
         self.server = server
         self.connected = False
@@ -21,6 +21,7 @@ class serverworker(Thread):
     def init(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.buffer = bufor(self.socket)
+        #import pdb; pdb.set_trace()
         if self.socket.connect_ex((self.ip, self.port)):
             return False
         else:
