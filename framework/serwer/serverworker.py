@@ -59,20 +59,21 @@ class serverworker(Thread):
             return
         
         #pobieranie aplikacji testowanej przez workera
-        self.data = pakiet()
-        self.data.typ = pakiet.FTPDOWNLOAD
-        self.data.port = 2222   # TODO: poprawic!
-        self.data.msg = self.socket.getsockname()[0]
-        self.buffer.send(self.data)
+        if False:
+            self.data = pakiet()
+            self.data.typ = pakiet.FTPDOWNLOAD
+            self.data.port = 2222   # TODO: poprawic!
+            self.data.msg = self.socket.getsockname()[0]
+            self.buffer.send(self.data)
 
-        self.data = self.buffer.read()
-        if self.data.typ != pakiet.FTPDOWNLOAD or self.data.msg != 'ok':
-            print 'Worker nie pobral FTP ', self.data.msg
-            self.close()
-            return
-        
-        self.ftpDownloaded = True
-        log('Worker '+self.ip[:-1]+' pobral FTP')
+            self.data = self.buffer.read()
+            if self.data.typ != pakiet.FTPDOWNLOAD or self.data.msg != 'ok':
+                print 'Worker nie pobral FTP ', self.data.msg
+                self.close()
+                return
+            
+            self.ftpDownloaded = True
+            log('Worker '+self.ip[:-1]+' pobral FTP')
 
         self.data = pakiet()
         self.data.typ = pakiet.BUILD
