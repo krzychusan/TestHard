@@ -5,14 +5,21 @@ class bufor:
     def __init__(self, sock):
         self.socket = sock
 
+    def _recv(self, size):
+        b = ""
+        left = size
+        while left > 0:
+            tmp = self.socket.recv(left)
+            left -= len(tmp)
+            b += tmp 
+        return b
+
     def read(self):
         self.size = self.socket.recv(2)
         if not self.size:
             return
         self.dataSize = struct.unpack("H", self.size)[0]
-        self.data = ''
-        while len(self.data) != self.dataSize:
-            self.data += self.socket.recv(self.dataSize - len(self.data))
+        self.data = self._recv(self.dataSize)
         self.ret = pakiet()
         self.ret.ParseFromString(self.data)
         return self.ret
