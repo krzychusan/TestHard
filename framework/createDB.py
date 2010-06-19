@@ -52,7 +52,7 @@ c.execute('''
 c.execute("""
     insert into results
     (task, tests_count, failures_count, errors_count, log, time_elapsed, timestamp)
-    values (1, 26, 3, 23, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
+    values (1, 43, 0, 0, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
 """)
 
 c.execute("""
