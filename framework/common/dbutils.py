@@ -125,6 +125,20 @@ def addResult(values):
     conn.commit()
     conn.close()
 
+def setUpTask(row):
+    print row
+    return  {
+        'name' : row[0],
+        'test_time' : row[1],
+        'comment' : row[2],
+        'email' : row[3],
+        'repository' : row[4],
+        'failures_count' : row[5],
+        'errors_count' : row[6],
+        'tests_count' : row[7],
+        'log' : row[8]
+     }
+
 def getTasks():
     conn = connect()
     cur = conn.cursor()
@@ -134,20 +148,47 @@ def getTasks():
             test_time,
             comment,
             email,
-            repository
-        from tasks
+            repository,
+            failures_count,
+            errors_count,
+            tests_count,
+            log
+        from tasks as ts 
+        join results 
+        on ts.id = task
     ''')
     tasksDict = []
     for row in cur:
-        tasksDict.append( {
-            'name' : row[0],
-            'test_time' : row[1],
-            'comment' : row[2],
-            'email' : row[3],
-            'repository' : row[4]
-        } )
+        tasksDict.append( 
+           setUpTask(row)
+        )
     conn.close()
     return tasksDict
+
+def getTaskByName(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select
+            name,
+            test_time,
+            comment,
+            email,
+            repository,
+            failures_count,
+            errors_count,
+            tests_count,
+            log
+        from tasks as ts
+        join results 
+        on ts.id = task
+        where name = ?
+    ''', (name,))
+    for row in cur:
+        conn.close()
+        return setUpTask(row)
+    conn.close()
+    return None
 
 def getRepositoryByName(name):
     conn = connect()
