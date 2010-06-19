@@ -24,12 +24,12 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
         <td>${task['repository']}</td>
         % if task['failures_count']:
             %if int(task['failures_count']) > 0:
-                <td>Failed</td>
+                <td style="color:red">Failed</td>
             %else:
-                <td>OK</td>
+                <td style="color:green">OK</td>
             %endif
         % else:
-            <td>None</td>
+            <td style="color:gray">None</td>
         % endif
         <td><a href="/tasks/remove?name=${task['name']}">remove</a></td>
     </tr>
