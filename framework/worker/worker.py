@@ -40,6 +40,7 @@ class worker:
 
     def _run_test(self):
         cmd = self.data.msg
+        print 'Run', cmd
 
         retcode = os.system('%s >> output.tmp 2>> output.tmp' % cmd)
         f = open('output.tmp', 'r')
