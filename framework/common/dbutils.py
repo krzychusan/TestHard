@@ -126,7 +126,6 @@ def addResult(values):
     conn.close()
 
 def setUpTask(row):
-    print row
     return  {
         'name' : row[0],
         'test_time' : row[1],
@@ -154,7 +153,7 @@ def getTasks():
             tests_count,
             log
         from tasks as ts 
-        join results 
+        left outer join results 
         on ts.id = task
     ''')
     tasksDict = []
@@ -180,7 +179,7 @@ def getTaskByName(name):
             tests_count,
             log
         from tasks as ts
-        join results 
+        left outer join results 
         on ts.id = task
         where name = ?
     ''', (name,))

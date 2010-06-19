@@ -16,9 +16,16 @@ class TasksController(BaseController):
         c.tasks = tm.getTasks()
         return render('/tasks.mako')
 
-    def showRaport(self):
-        pass
+    def info(self):
+        tm = TasksManager()
+        c.name = request.params['name']
+        return render('/tasksInfo.mako')
     
+    def showRaport(self):
+        tm = TasksManager()
+        c.task = tm.getTask(request.params['name'])
+        return render('/taskRaport.mako')
+
     def remove(self):
         tm = TasksManager()
         tm.removeTask(request.params['name'])

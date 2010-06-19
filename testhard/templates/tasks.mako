@@ -18,19 +18,22 @@ ${h.link_to('ALL', url('/'))} - ${h.link_to('Finished', url('/'))} - ${h.link_to
     % for task in c.tasks:
     <tr>
         <td>${c.tasks.index(task)}</td>
-        <td>${task['name']}</td>
+        <td><a href="/tasks/info?name=${task['name']}">${task['name']}</a></td>
         <td>${task['test_time']}</td>
         <td>${task['email']}</td>
         <td>${task['repository']}</td>
+        <td><a href="/tasks/showRaport?name=${task['name']}">
         % if task['failures_count']:
             %if int(task['failures_count']) > 0:
-                <td>Failed</td>
+                <p style="color:red">Failed</p>
             %else:
-                <td>OK</td>
+                <p style="color:green">OK</p>
             %endif
         % else:
-            <td>None</td>
+            <p style="color:gray">None</p>
         % endif
+        </a>
+        </td>
         <td><a href="/tasks/remove?name=${task['name']}">remove</a></td>
     </tr>
     % endfor
