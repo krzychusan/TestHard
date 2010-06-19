@@ -1,7 +1,8 @@
+#!/usr/bin/python
 import time
 import ConfigParser
 import threading
-
+import sys
 
 # TODO: delete imports below
 from IRepository import IRepository
@@ -32,6 +33,7 @@ class server:
         self.path = config.get('Rep', 'path')       #tymczasowy katalog na dysku dla repozytorium
         self.repository = repository.name       #adres repozytorium
         self.svnauth = repository.auth      #czy wymagana autoryzacja do svna
+        self.build_cmd = repository.build_cmd
         self.find_tests_cmd = repository.find_tests_cmd
         self.run_test_cmd = repository.run_test_cmd
         #self.svndownload = config.getboolean('Rep', 'download')        #czy pobierac rep. (moze jest juz)
@@ -48,6 +50,8 @@ class server:
             self.ftp = ftpServer.ftpServer(self.path, 2222)
 
     def _find_tests(self):
+        cwd = os.getcwd()
+        os.chdir(self.path)
         script_cmds = self.find_tests_cmd.split('\n')
         for cmd in script_cmds:
             r = os.system('%s >> output.tmp 2>> output.tmp' % cmd)
@@ -62,7 +66,32 @@ class server:
         lines = f.readlines()
         f.close()
         os.system('rm output.tmp')
+        os.chdir(cwd)
         return [self.run_test_cmd.replace('$$', l.rstrip('\n')) for l in lines]
+
+
+    def _compile(self):
+        cwd = os.getcwd()
+        os.chdir(self.path)
+        script_cmds = self.build_cmd.split('\n')
+        for cmd in script_cmds:
+            r = [0, 0, 0]
+            r[0] = os.system('echo " +++ TESTHARD +++ Running %s:" >> output.tmp' % cmd)
+            r[1] = os.system('%s >> output.tmp 2>> output.tmp' % cmd)
+            r[2] = os.system('echo " +++ TESTHARD +++ Last command result: %d" >> output.tmp' % r[1])
+            if r != [0, 0, 0]:
+                print 'Error while running tests'
+                break
+
+        f = open('output.tmp', 'r')
+        if not f:
+            print 'Nie mozna otworzyc pliku wyjsciowego'
+            self.close()
+        result = ''.join(f.readlines())
+        os.system('rm output.tmp')
+        os.chdir(cwd)
+        print result
+
 
     def start(self):
         if self.svndownload:
@@ -72,6 +101,7 @@ class server:
         else:
             log('Bez pobierania svn.')
 
+        self._compile()
         self.jobs = self._find_tests()
         self.workers = []
         tmpworker = None
@@ -103,14 +133,28 @@ class server:
     def close(self):
         log('Koniec.')
 
+
+
 if __name__ == '__main__':
-    rep = IRepository()
-    rep.name = 'http://testhard.unfuddle.com/svn/testhard_project1/' #adres repozytorium
-    rep.svnauth = True #czy wymagana autoryzacja do svna
-    rep.find_tests_cmd = 'for i in `seq 1 5`; do echo $i; done'
-    rep.run_test_cmd = 'echo "[junit] Tests run: $$, Failures: $$, Errors: $$, Time elapsed: $$.$$ sec"'
-    rep.auth = True
-    rep.authLogin = 'krzychusan' #dane do autoryzacji do svna
-    rep.authPassword = '5120045'
+    if len(sys.argv) <= 1:
+        rep = IRepository()
+        rep.name = 'http://testhard.unfuddle.com/svn/testhard_project1/' #adres repozytorium
+        rep.svnauth = True #czy wymagana autoryzacja do svna
+        #rep.find_tests_cmd = 'for i in `seq 1 100`; do echo $i; done'
+        rep.find_tests_cmd = 'find . -iname "*test*class"'
+        rep.run_test_cmd = 'echo "[junit] Tests run: 1, Failures: 1, Errors: 1, Time elapsed: 1.1 sec $$"'
+        rep.auth = True
+        rep.build_cmd = 'ant compile'
+        rep.authLogin = 'krzychusan' #dane do autoryzacji do svna
+        rep.authPassword = '5120045'
+    else:
+        repo_name = sys.argv[1]
+        manager = RepoManager()
+        raw_rep = manager.getRepository(repo_name)
+        if not raw_rep:
+            print 'Nie ma repozytorium o podanej nazwie.'
+            sys.exit(-1)
+        rep = manager.convertRepository(raw_rep)
     s = server(rep)
     s.start()
+
