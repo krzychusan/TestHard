@@ -8,7 +8,7 @@ from common.bufor import bufor
 class worker:
     def __init__(self):
         #CONFIG
-        self.host = 'localhost'
+        self.host = ''
         self.port = 11111
         self.path = './ssvn'
         os.chdir(self.path)
