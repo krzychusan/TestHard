@@ -52,7 +52,7 @@ def getUnfinishedTasks():
         from tasks as ts 
         left outer join results 
         on ts.id = task
-        where timestamp = NULL
+        where timestamp is null 
         order by test_time 
         limit 1
     ''')
@@ -84,7 +84,8 @@ def updateRepository(oldName, values):
             password = ?,
             build_cmd = ?,
             find_tests_cmd = ?,
-            run_test_cmd = ?
+            run_test_cmd = ?,
+            compile_on_server = ?
         where name = ?
     """, values + (oldName,))
     conn.commit()

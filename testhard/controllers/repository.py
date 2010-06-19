@@ -40,7 +40,7 @@ class RepositoryController(BaseController):
         if request.params['login']:
             added.setAuth(request.params['login'], request.params['password'])
         added.setTestAttributes(request.params['build_cmd'], request.params['find_tests'], request.params['run_test'])
-        if request.params['compile'] == 'on':
+        if 'compile' in request.params and request.params['compile'] == 'on':
             added.compileOnServer = True
         con.addRepository(added)
         c.message = 'Pomyslnie dodano repozytorium %s ' % request.params['name']
@@ -66,6 +66,8 @@ class RepositoryController(BaseController):
         if request.params['login']:
             rep.setAuth(request.params['login'], request.params['password'])
         rep.setTestAttributes(request.params['build_cmd'], request.params['find_tests'], request.params['run_test'])
+        if 'compile' in request.params and request.params['compile'] == 'on':
+            rep.compileOnServer = True
         if RepoManager().updateRepository(rep, request.params['old_name']):
             c.message = 'Pomyslnie edytowano repozytorium %s .' % request.params['old_name']
         else:
