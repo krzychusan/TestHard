@@ -15,6 +15,13 @@ class TasksController(BaseController):
     def index(self):
         tm = TasksManager()
         c.tasks = tm.getTasks()
+        if 'sort' in request.params:
+            sort = request.params['sort']
+        if sort == 'F':
+            c.tasks = [obj for obj in c.tasks if obj['timestamp']]
+        elif sort == 'U':
+            c.tasks = [obj for obj in c.tasks if not obj['timestamp']]
+
         return render('/tasks.mako')
 
     def info(self):
