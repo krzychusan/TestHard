@@ -6,6 +6,10 @@ from common.datapakiet_pb2 import pakiet
 from common.bufor import bufor
 from common.utils import log
 
+import sys, os
+sys.path.append(os.path.dirname(os.getcwd()))
+from RepoManager import *
+
 from parsers.ant_junit import AntJUnitParser
 
 class serverworker(Thread):
@@ -27,7 +31,7 @@ class serverworker(Thread):
         else:
             return True
 
-    def _test(self, test_cmd):
+    def _test(self, job_file, test_cmd):
         self.data = pakiet()
         self.data.typ = pakiet.RUNTESTS
         self.data.msg = test_cmd
@@ -40,7 +44,7 @@ class serverworker(Thread):
             return
  
         print 'RETURNED', self.data.msg
-        results = AntJUnitParser(self.data.msg)
+        results = AntJUnitParser(self.data.msg, job_file)
         return results
 
     def run(self):
@@ -84,11 +88,14 @@ class serverworker(Thread):
             log('Blad podczas budowania')
             #self.close()
             #return
+    
+        rep = RepoManager()
 
         while True:
             self.server.workersLock.acquire()
             if len(self.server.jobs) > 0:
-                job = self.server.jobs[0]
+                job_file = self.server.jobs[0]
+                job = self.server.run_test_cmd.replace('$$', job_file)
                 self.server.jobs = self.server.jobs[1:]
             else:
                 self.server.workersLock.release()
@@ -98,7 +105,9 @@ class serverworker(Thread):
                 break
             self.server.workersLock.release()
 
-            results = self._test(job)
+            results = self._test(job_file, job)
+            rep = RepoManager()
+            rep.addResult(self.server.taskName, results)
             print 'WYNIKI TESTOW'
             print 'ILE: %d FAILURES: %d, ERRORS: %d LOG:' % (results.tests_count, results.failures, results.errors)
             print '/-------------\\'

@@ -2,7 +2,7 @@ import re
 
 class AntJUnitParser:
    
-    def __init__(self, input):
+    def __init__(self, input, name=''):
         self.log = input
         result = re.search('\[junit\] Tests run: (\d+), Failures: (\d+), Errors: (\d+), Time elapsed: (\d+[.,]\d+) sec', self.log)
         if not result:
@@ -14,4 +14,5 @@ class AntJUnitParser:
         self.failures = int(vals[1])
         self.errors = int(vals[2])
         self.time_elapsed = float(vals[3].replace(',', '.'))
+        self.test_case_name = name
 

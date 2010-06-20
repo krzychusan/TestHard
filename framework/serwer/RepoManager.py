@@ -53,7 +53,7 @@ class RepoManager:
     def removeRepository(self, nazwa):
         db.removeRepository(nazwa)
 
-    def addResult(self, result):
-        db.addResult((db.taskId(task_name), result.failure, 
-            result.errors, result.test_count, result.log, result.time_elapsed))
+    def addResult(self, task_name, result):
+        db.addResult((db.taskId(task_name), result.failures, 
+            result.errors, result.tests_count, result.log, result.time_elapsed))
 

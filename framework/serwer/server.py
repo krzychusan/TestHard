@@ -10,7 +10,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.getcwd()))
 from RepoManager import *
 
-import RepoManager
+#import RepoManager
 import ftpServer
 import serverworker
 from common.utils import log
@@ -36,13 +36,14 @@ class server:
         self.build_cmd = repository.build_cmd
         self.find_tests_cmd = repository.find_tests_cmd
         self.run_test_cmd = repository.run_test_cmd
+        self.taskName = repository.taskName
         #self.svndownload = config.getboolean('Rep', 'download')        #czy pobierac rep. (moze jest juz)
         self.svndownload = True
         if self.svnauth:
             self.authLogin = repository.login #dane do autoryzacji do svna
             self.authPassword = repository.password
 
-            rep = RepoManager.RepoManager()
+            rep = RepoManager()
             rep = rep.getRepositoriesTypes()[0]
         self.svn = rep()
         if self.svnauth:
@@ -67,7 +68,7 @@ class server:
         f.close()
         os.system('rm output.tmp')
         os.chdir(cwd)
-        return [self.run_test_cmd.replace('$$', l.rstrip('\n')) for l in lines]
+        return [l.rstrip('\n') for l in lines]
 
 
     def _compile(self):
@@ -136,25 +137,29 @@ class server:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 1:
+    if len(sys.argv) <= 2:
         rep = IRepository()
         rep.name = 'http://testhard.unfuddle.com/svn/testhard_project1/' #adres repozytorium
         rep.svnauth = True #czy wymagana autoryzacja do svna
-        #rep.find_tests_cmd = 'for i in `seq 1 100`; do echo $i; done'
-        rep.find_tests_cmd = 'find . -iname "*test*class"'
+        rep.find_tests_cmd = 'for i in `seq 1 10`; do echo $i; done'
+        #rep.find_tests_cmd = 'find . -iname "*test*class"'
         rep.run_test_cmd = 'echo "[junit] Tests run: 1, Failures: 1, Errors: 1, Time elapsed: 1.1 sec $$"'
+        #rep.run_test_cmd = 'ant test'
         rep.auth = True
         rep.build_cmd = 'ant compile'
         rep.authLogin = 'krzychusan' #dane do autoryzacji do svna
         rep.authPassword = '5120045'
+        rep.taskName = 'qweqweqwe'
     else:
         repo_name = sys.argv[1]
         manager = RepoManager()
-        raw_rep = manager.getRepository(repo_name)
-        if not raw_rep:
+        try:
+            raw_rep = manager.getRepository(repo_name)
+        except IndexError:
             print 'Nie ma repozytorium o podanej nazwie.'
             sys.exit(-1)
         rep = manager.convertRepository(raw_rep)
+        rep.taskName = sys.argv[2]
     s = server(rep)
     s.start()
 
