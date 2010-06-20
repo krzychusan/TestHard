@@ -11,18 +11,28 @@ class ftpClient:
 
 	def download(self, url, path):
                 print 'url + path:', url, path
-                try:
-			print 'Connecting to ftp'
+                self.done = False
+                self.retry = 5
+                while not self.done and self.retry > 0:
+                    try:
+		    	print 'Connecting to ftp'
                         self.ftp.connect(url[0], int(url[1]))
 			self.ftp.login('anonymous', self.myip)
 			if not os.path.exists(path):
 				os.makedirs(path)
                         print 'Downloading ftp ...'
-			self.downloadDir('.', path)	
-		except:
-			print self.formatExceptionInfo()
-
+                        try:
+			    self.downloadDir('.', path)	
+                        except:
+                            return False
+                        self.done = True
+		    except:
+                        print 'Failed to connect to ftp'
+			#print self.formatExceptionInfo()
+                        retry -= 1
+                
 		self.close()
+                return True
 	
 	def downloadDir(self, path, localPath):
 		#print 'downloadDir:'+path
