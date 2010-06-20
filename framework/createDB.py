@@ -43,17 +43,18 @@ c.execute('''
         tests_count INTEGER,
         failures_count INTEGER,
         errors_count INTEGER,
-        time_elapsed TEXT,
+        time_elapsed REAL,
         timestamp DATETIME,
-        log TEXT
+        log TEXT,
+        test_case_name TEXT
    )
 ''')
 
-c.execute("""
-    insert into results
-    (task, tests_count, failures_count, errors_count, log, time_elapsed, timestamp)
-    values (1, 43, 0, 0, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
-""")
+#c.execute("""
+#    insert into results
+#    (task, tests_count, failures_count, errors_count, log, time_elapsed, timestamp)
+#    values (1, 43, 0, 0, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
+#""")
 
 c.execute("""
     insert into repositories 

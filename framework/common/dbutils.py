@@ -52,7 +52,8 @@ def getUnfinishedTasks():
         from tasks as ts 
         left outer join results 
         on ts.id = task
-        where timestamp is null 
+        where timestamp is null
+        and test_time <= datetime('now','localtime')
         order by test_time 
         limit 1
     ''')
@@ -185,7 +186,7 @@ def getTasks():
             comment,
             email,
             repository,
-            failures_count,
+            sum(failures_count),
             errors_count,
             tests_count,
             log,
@@ -202,6 +203,34 @@ def getTasks():
         )
     conn.close()
     return tasksDict
+
+def getResultsByTask(name, testcase):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select
+            failures_count,
+            errors_count,
+            tests_count,
+            log,
+            timestamp,
+            test_case_name
+        from results
+        where task = ? 
+        and test_case_name = ?
+    ''', (name, testcase))
+    result = []
+    for row in cur:
+        result.append( {
+            'failures_count':row[0],
+            'errors_count' : row[1],
+            'tests_count' : row[2],
+            'log' : row[3],
+            'timestamp' : row[4],
+            'test_case_name' : row[5]
+            } )
+    conn.close()
+    return result
 
 def getTaskByName(name):
     conn = connect()
