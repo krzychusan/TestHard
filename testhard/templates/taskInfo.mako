@@ -13,7 +13,7 @@ Type: ${c.info.typ} <br><br>
 <h4>Email:</h4> ${c.task['email']}<br><br>
 
 <h4>Comment:</h4>
-${c.task['comment']}<br><br>
+<pre>${c.task['comment']}</pre><br>
 
 ${h.link_to('Return', url('/tasks'))}
 

@@ -13,17 +13,17 @@
 % endif
 
 <h4>Comment:</h4>
-${c.info.comment}<br><br>
+<pre>${c.info.comment}</pre>
 
 <h4>Build on server?:</h4>
 ${c.info.compileOnServer}<br><br>
 <h4>Build commands:</h4>
-${c.info.build_cmd}<br><br>
+<pre>${c.info.build_cmd}</pre>
 
 <h4>Find test command:</h4>
-${c.info.find_tests_cmd}<br><br>
+<pre>${c.info.find_tests_cmd}</pre><br>
 <h4>Run test command:</h4>
-${c.info.run_test_cmd}<br><br>
+<pre>${c.info.run_test_cmd}</pre><br>
 
 ${h.link_to('Return', url('/repository'))}
 
