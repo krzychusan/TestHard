@@ -1,9 +1,28 @@
 
 <%inherit file="/szablon.mako"/>
+<head>
+<script type="text/javascript">
+var descriptions = new Array();
+% for temp in range(c.tempSize):
+    descriptions[${temp}] = new Array(3);
+    descriptions[${temp}][0] = "${(c.templates[temp])[1]}";
+    descriptions[${temp}][1] = "${(c.templates[temp])[2]}";
+    descriptions[${temp}][2] = "${(c.templates[temp])[3]}";
+% endfor
+
+function setTemplate(){
+    var index = document.getElementById("template").selectedIndex;
+    document.getElementById("build_cmd").value = descriptions[index][0];
+    document.getElementById("find_tests").value = descriptions[index][1];
+    document.getElementById("run_test").value = descriptions[index][2];
+}
+
+</script>
+</head>
 
 <h2> Repositories </h2>
 
-<form class="feedbackform" method="GET" action="/repository/doAdd">
+<form name="rep_add" class="feedbackform" method="GET" action="/repository/doAdd">
 <div class="fieldwrapper">
     <label for="name" class="styled">Name:</label>
     <div class="thefield">
@@ -51,6 +70,16 @@
     </div>
 </div>
 
+<div class="fieldwrapper">
+    <label for="template" class="styled">Template:</label>
+    <div class="thefield">
+        <select name="template" id="template" onChange="setTemplate()">
+        % for temp in c.templates:
+            <option value="${temp[0]}">${temp[0]}</option>
+        % endfor
+        </select>
+    </div>
+</div>
 
 <div class="fieldwrapper">
     <label for="build_cmd" class="styled">Build commands:</label>

@@ -26,7 +26,7 @@
                     <li>${h.link_to('Repository', url('/repository'))}</li>
                     <li>${h.link_to('Run', url('/run'))}</li>
                     <li>${h.link_to('Tasks', url('/tasks'))}</li>
-                    <li>${h.link_to('Configure', url('/results'))}</li>
+                    <li>${h.link_to('Configure', url('/configure'))}</li>
                 </ul>
             </div>
         </div>

@@ -14,7 +14,10 @@ from serwer.IRepository import IRepository
 log = logging.getLogger(__name__)
 
 class RepositoryController(BaseController):
-
+    template = [ ['Empty', '', '', ''],
+                 ['java', '1', '2', '3'],
+                 ['ant', 'a1', 'a2', 'a3']
+               ]
     def index(self):
         # Return a rendered template
         con = RepoManager()
@@ -25,6 +28,8 @@ class RepositoryController(BaseController):
         con = RepoManager()
         c.repTypes = con.getRepositoriesTypes()
         c.repTypes = [it() for it in c.repTypes]
+        c.templates = RepositoryController.template
+        c.tempSize = len(c.templates)
         return render('/repositoryAdd.mako')
     
     def info(self):
