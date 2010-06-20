@@ -7,7 +7,7 @@ class AntJUnitParser:
         result = re.search('\[junit\] Tests run: (\d+), Failures: (\d+), Errors: (\d+), Time elapsed: ([^ ]+) sec', self.log)
         if not result:
             print 'Parse error in AntJUnitParser!'
-            raise ValueException()
+            raise ValueError()
 
         vals = result.groups()
         self.tests_count = int(vals[0])
