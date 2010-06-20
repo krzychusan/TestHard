@@ -85,7 +85,7 @@ c.execute("""
    (name, test_time, email, repository)
    values (
         'SimpleCheck',
-        '12-01-2011 00:45:00',
+        '2011-03-20 00:45:00',
         'admin@tomaszow.com',
         'abcd'
    )
@@ -96,12 +96,11 @@ c.execute("""
    (name, test_time, email, repository)
    values (
         'SimpleCheck2',
-        '12-01-2011 00:45:00',
+        '2011-03-20 00:45:00',
         'admin@tomaszow.com',
         'abcd'
    )
 """)
-
 
 conn.commit()
 conn.close()

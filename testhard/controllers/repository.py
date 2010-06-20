@@ -63,6 +63,8 @@ class RepositoryController(BaseController):
         c.rep = con.getRepository(request.params['name'])
         c.repTypes = con.getRepositoriesTypes()
         c.repTypes = [it() for it in c.repTypes]
+        c.templates = RepositoryController.template
+        c.tempSize = len(c.templates)
         return render('/repositoryEdit.mako')
 
     def doEdit(self):

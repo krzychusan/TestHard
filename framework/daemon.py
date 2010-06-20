@@ -1,13 +1,16 @@
-import serwer.RepoManager as rp
 import serwer.TasksManager as tm
 import common.dbutils as db
 import time
 
-repoManager = rp.RepoManager()
+import subprocess
+
 taskManager = tm.TasksManager()
 
-while true:
+while True:
     tasks = db.getUnfinishedTasks()
     if len(tasks) > 0:
-        pass
+        print 'Launching task %s.' % tasks[0]['name']
+        retcode = subprocess.call(["./run.sh", "run-server", tasks[0]['repository'], tasks[0]['name']])
+        print 'Task %s done!' % tasks[0]['name']
     time.sleep(60)
+    
