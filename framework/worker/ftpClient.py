@@ -29,7 +29,7 @@ class ftpClient:
 		    except:
                         print 'Failed to connect to ftp'
 			#print self.formatExceptionInfo()
-                        retry -= 1
+                        self.retry -= 1
                 
 		self.close()
                 return True
@@ -58,6 +58,7 @@ class ftpClient:
 
 	def close(self):
 		self.ftp.quit()
+                print 'Zamykam FTP'
 
 	def formatExceptionInfo(maxTBlevel=20):
          cla, exc, trbk = sys.exc_info()

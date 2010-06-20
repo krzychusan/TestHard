@@ -22,5 +22,5 @@ while True:
                   'Szczegolowy opis wynikow zadania w dziale Tasks (TestHard).'
             ms.sendMail(currentTask['name'], currentTask['email'], content)
         print 'Task %s done!' % tasks[0]['name']
-    time.sleep(60)
+    time.sleep(5)
     
