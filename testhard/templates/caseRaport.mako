@@ -1,7 +1,7 @@
 
 <%inherit file="/szablon.mako"/>
 
-<h2> ${c.info['test_case_name']}  Test Case raport </h2>
+<h2> "${c.info['test_case_name']}"  Test Case raport </h2>
 
 % if c.info['timestamp']:
     Timestamp: <b> ${c.info['timestamp']} </b>
