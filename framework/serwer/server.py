@@ -36,13 +36,14 @@ class server:
         self.build_cmd = repository.build_cmd
         self.find_tests_cmd = repository.find_tests_cmd
         self.run_test_cmd = repository.run_test_cmd
+        self.taskName = repository.taskName
         #self.svndownload = config.getboolean('Rep', 'download')        #czy pobierac rep. (moze jest juz)
         self.svndownload = True
         if self.svnauth:
             self.authLogin = repository.login #dane do autoryzacji do svna
             self.authPassword = repository.password
 
-            rep = RepoManager.RepoManager()
+            rep = RepoManager()
             rep = rep.getRepositoriesTypes()[0]
         self.svn = rep()
         if self.svnauth:
@@ -136,7 +137,7 @@ class server:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 1:
+    if len(sys.argv) <= 2:
         rep = IRepository()
         rep.name = 'http://testhard.unfuddle.com/svn/testhard_project1/' #adres repozytorium
         rep.svnauth = True #czy wymagana autoryzacja do svna
@@ -148,6 +149,7 @@ if __name__ == '__main__':
         rep.build_cmd = 'ant compile'
         rep.authLogin = 'krzychusan' #dane do autoryzacji do svna
         rep.authPassword = '5120045'
+        rep.taskName = 'qweqweqwe'
     else:
         repo_name = sys.argv[1]
         manager = RepoManager()
@@ -157,6 +159,7 @@ if __name__ == '__main__':
             print 'Nie ma repozytorium o podanej nazwie.'
             sys.exit(-1)
         rep = manager.convertRepository(raw_rep)
+        rep.taskName = sys.argv[2]
     s = server(rep)
     s.start()
 

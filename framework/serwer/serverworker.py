@@ -6,6 +6,10 @@ from common.datapakiet_pb2 import pakiet
 from common.bufor import bufor
 from common.utils import log
 
+import sys, os
+sys.path.append(os.path.dirname(os.getcwd()))
+from RepoManager import *
+
 from parsers.ant_junit import AntJUnitParser
 
 class serverworker(Thread):
@@ -84,6 +88,8 @@ class serverworker(Thread):
             log('Blad podczas budowania')
             #self.close()
             #return
+    
+        rep = RepoManager()
 
         while True:
             self.server.workersLock.acquire()
@@ -99,6 +105,8 @@ class serverworker(Thread):
             self.server.workersLock.release()
 
             results = self._test(job)
+            rep = RepoManager()
+            rep.addResult(self.server.taskName, results)
             print 'WYNIKI TESTOW'
             print 'ILE: %d FAILURES: %d, ERRORS: %d LOG:' % (results.tests_count, results.failures, results.errors)
             print '/-------------\\'
