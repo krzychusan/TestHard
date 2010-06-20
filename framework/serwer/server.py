@@ -68,7 +68,7 @@ class server:
         f.close()
         os.system('rm output.tmp')
         os.chdir(cwd)
-        return [self.run_test_cmd.replace('$$', l.rstrip('\n')) for l in lines]
+        return [l.rstrip('\n') for l in lines]
 
 
     def _compile(self):
