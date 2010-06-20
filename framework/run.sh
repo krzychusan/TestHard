@@ -13,7 +13,7 @@ if [ "$1" = "run-server" ]; then
         echo "Usage: run-server repo_name task_name"
     else
         cd serwer
-        python $SERVER
+        python $SERVER $2 $3
     fi
 elif [ "$1" = "run-worker" ]; then
     cd worker
