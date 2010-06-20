@@ -99,7 +99,7 @@ class worker:
         self.close()
 
     def close(self):
-        print 'Robota skonczona'
         self.conn.close()
         self.socket.close()
+        print 'Robota skonczona'
 
