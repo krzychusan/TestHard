@@ -15,8 +15,14 @@ log = logging.getLogger(__name__)
 
 class RepositoryController(BaseController):
     template = [ ['Empty', '', '', ''],
-                 ['java', '1', '2', '3'],
-                 ['ant', 'a1', 'a2', 'a3']
+                 ['simple junit4', 'ant compile',
+                  "find src/test/org/apache/lucene/ -iname 'Test*java' | sed -s 's/\.java//g'",
+                  'java -cp .:./lib/junit.jar org.junit.runner.JUnitCore $$'
+                 ],
+                 ['ant + junit', 'ant compile',
+                  "find src/test/org/apache/lucene/ -iname 'Test*java' -printf %f\\\\n | sed -s 's/\.java//g'",
+                  'ant test -Dtestcase=$$'
+                 ]
                ]
     def index(self):
         # Return a rendered template
