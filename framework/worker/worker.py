@@ -4,6 +4,7 @@ import os
 import ftpClient
 from common.datapakiet_pb2 import pakiet
 from common.bufor import bufor
+import time
 
 class worker:
     def __init__(self):
@@ -65,7 +66,14 @@ class worker:
 
     def start(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.bind((self.host, self.port))
+        while 1:
+            try:
+                self.socket.bind((self.host, self.port))
+            except:
+                time.sleep(30)
+            else:
+                break
+
         self.socket.listen(1)
         self.active = True
         self.ftp = ftpClient.ftpClient(self.socket.getsockname()[0])
