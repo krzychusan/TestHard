@@ -162,8 +162,8 @@ def addResult(values):
     cur = conn.cursor()
     cur.execute('''
         insert into results
-        (timestamp, task, failures_count, errors_count, tests_count, log, time_elapsed)
-        values (datetime('now','localtime'), ?, ?, ?, ?, ?, ?)
+        (timestamp, task, failures_count, errors_count, tests_count, log, time_elapsed, test_case_name)
+        values (datetime('now','localtime'), ?, ?, ?, ?, ?, ?,?)
     ''', values)
     conn.commit()
     conn.close()
@@ -178,9 +178,7 @@ def setUpTask(row):
         'failures_count' : row[5],
         'errors_count' : row[6],
         'tests_count' : row[7],
-        'log' : row[8],
-        'time_elapsed' : row[9],
-        'timestamp' : row[10]
+        'timestamp' : row[8]
      }
 
 def getTasks():
@@ -193,15 +191,14 @@ def getTasks():
             comment,
             email,
             repository,
-            failures_count,
-            errors_count,
-            tests_count,
-            log,
-            time_elapsed,
-            timestamp
+            sum(failures_count),
+            sum(errors_count),
+            sum(tests_count),
+            max(timestamp)
         from tasks as ts 
         left outer join results 
         on ts.id = task
+        group by name, test_time, comment, email, repository
     ''')
     tasksDict = []
     for row in cur:
@@ -210,6 +207,27 @@ def getTasks():
         )
     conn.close()
     return tasksDict
+
+def getTestCaseByTask(name):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('''
+        select
+            test_case_name,
+            failures_count,
+            errors_count
+        from results
+        where task = ?
+    ''',(taskId(name),))
+    result = []
+    for row in cur:
+        result.append({
+            'name' : row[0],
+            'failures' : row[1],
+            'errors' : row[2]
+        })
+    conn.close()
+    return result
 
 def getResultsByTask(name, testcase):
     conn = connect()
@@ -221,23 +239,26 @@ def getResultsByTask(name, testcase):
             tests_count,
             log,
             timestamp,
-            test_case_name
+            test_case_name,
+            time_elapsed
         from results
         where task = ? 
         and test_case_name = ?
-    ''', (name, testcase))
+    ''', (taskId(name), testcase))
     result = []
     for row in cur:
-        result.append( {
+        conn.close()
+        return {
             'failures_count':row[0],
             'errors_count' : row[1],
             'tests_count' : row[2],
             'log' : row[3],
             'timestamp' : row[4],
-            'test_case_name' : row[5]
-            } )
+            'test_case_name' : row[5],
+            'time_elapsed' : row[6]
+            } 
     conn.close()
-    return result
+    return None
 
 def getTaskByName(name):
     conn = connect()
@@ -249,16 +270,15 @@ def getTaskByName(name):
             comment,
             email,
             repository,
-            failures_count,
-            errors_count,
-            tests_count,
-            log,
-            time_elapsed,
-            timestamp
+            sum(failures_count),
+            sum(errors_count),
+            sum(tests_count),
+            max(timestamp)
         from tasks as ts
         left outer join results 
         on ts.id = task
         where name = ?
+        group by name, test_time, comment, email, repository
     ''', (name,))
     for row in cur:
         conn.close()

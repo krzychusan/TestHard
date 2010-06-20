@@ -58,14 +58,17 @@ c.execute("""
 
 c.execute("""
     insert into repositories 
-    (name, url, comment, type, login, password)
+    (name, url, comment, type, login, password, build_cmd, find_tests_cmd, run_test_cmd)
     values (
         'abcd',
         'http://testhard.unfuddle.com/svn/testhard_project1/',
         'asfer',
         'svn',
         'krzychusan',
-        '5120045'
+        '5120045',
+        'echo Building !!!',
+        'for i in `seq 100`; do echo $i; done',
+        'echo "[junit] Tests run: $$, Failures: $$, Errors: $$, Time elapsed: $$.$$ sec"'
     )
 """)
 
@@ -85,7 +88,7 @@ c.execute("""
    (name, test_time, email, repository)
    values (
         'SimpleCheck',
-        '2011-03-20 00:45:00',
+        '2010-03-20 00:45:00',
         'admin@tomaszow.com',
         'abcd'
    )

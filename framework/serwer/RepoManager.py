@@ -55,5 +55,5 @@ class RepoManager:
 
     def addResult(self, task_name, result):
         db.addResult((db.taskId(task_name), result.failures, 
-            result.errors, result.tests_count, result.log, result.time_elapsed))
+            result.errors, result.tests_count, result.log, result.time_elapsed, result.test_case_name))
 
