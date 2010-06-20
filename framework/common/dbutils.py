@@ -186,7 +186,7 @@ def getTasks():
             comment,
             email,
             repository,
-            sum(failures_count),
+            failures_count,
             errors_count,
             tests_count,
             log,
@@ -201,6 +201,7 @@ def getTasks():
         tasksDict.append( 
            setUpTask(row)
         )
+    print tasksDict
     conn.close()
     return tasksDict
 
