@@ -17,7 +17,7 @@
     <br/>
     <b>Log:</b>
     <br/>
-    <pre class="shcode"> ${c.info['log']} </pre>
+    <pre class="shcode">${c.info['log']}</pre>
 %else:
     There is no log yet.
 %endif
