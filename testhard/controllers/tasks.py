@@ -3,6 +3,7 @@ import logging
 from serwer.TasksManager import TasksManager
 from serwer.RepoManager import RepoManager
 import common.dbutils as db
+import logutils
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 
@@ -16,6 +17,17 @@ class TasksController(BaseController):
         c.info = db.getResultsByTask(request.params['task'], request.params['name'])
         c.ret = '/showRaport?name=' + request.params['task']
         return render('/caseRaport.mako')
+
+
+    def getLogs(self):
+        c.content = logutils.getLog()
+        return render('/log.mako')
+
+    def removeLog(self):
+        logutils.removeLog()
+        c.message = "wyczyszczono logi"
+        c.link = "/tasks/getLogs"
+        return render('message.mako')
 
     def index(self):
         tm = TasksManager()

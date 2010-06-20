@@ -3,6 +3,7 @@ import common.dbutils as db
 import time
 import common.mailSender as ms
 import subprocess
+import os
 
 taskManager = tm.TasksManager()
 
@@ -11,7 +12,7 @@ while True:
     tasks = db.getUnfinishedTasks()
     if len(tasks) > 0:
         print 'Launching task %s.' % tasks[0]['name']
-        retcode = subprocess.call(["./run.sh", "run-server", tasks[0]['repository'], tasks[0]['name']])
+        retcode = os.system("./run.sh %s %s %s >> log.txt 2>> log.txt" % ("run-server", tasks[0]['repository'], tasks[0]['name']))
         currentTask = db.getTaskByName(tasks[0]['name'])
         if currentTask['errors_count'] is not None:
             content = 'Zadanie ' + currentTask['name'] + ' zostalo zakonczone.\n' + \

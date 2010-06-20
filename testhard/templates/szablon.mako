@@ -27,6 +27,7 @@
                     <li>${h.link_to('Run', url('/run'))}</li>
                     <li>${h.link_to('Tasks', url('/tasks'))}</li>
                     <li>${h.link_to('Configure', url('/configure'))}</li>
+                    <li>${h.link_to('Logs', url('/tasks/getLogs'))}</li>
                 </ul>
             </div>
         </div>
