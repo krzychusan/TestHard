@@ -50,11 +50,11 @@ c.execute('''
    )
 ''')
 
-#c.execute("""
-#    insert into results
-#    (task, tests_count, failures_count, errors_count, log, time_elapsed, timestamp)
-#    values (1, 43, 0, 0, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
-#""")
+c.execute("""
+    insert into results
+    (task, tests_count, failures_count, errors_count, log, time_elapsed, timestamp)
+    values (1, 43, 0, 0, 'log fwed e qoqif wr', '53.12', datetime('now','localtime'))
+""")
 
 c.execute("""
     insert into repositories 
@@ -96,7 +96,7 @@ c.execute("""
    (name, test_time, email, repository)
    values (
         'SimpleCheck2',
-        '12-02-2011 00:45:00',
+        '12-03-2011 00:45:00',
         'admin@tomaszow.com',
         'abcd'
    )

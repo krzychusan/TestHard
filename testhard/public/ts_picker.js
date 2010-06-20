@@ -114,11 +114,12 @@ function str2dt (str_datetime) {
 	var re_date = /^(\d+)\-(\d+)\-(\d+)\s+(\d+)\:(\d+)\:(\d+)$/;
 	if (!re_date.exec(str_datetime))
 		return alert("Invalid Datetime format: "+ str_datetime);
-	return (new Date (RegExp.$3, RegExp.$2-1, RegExp.$1, RegExp.$4, RegExp.$5, RegExp.$6));
+	return (new Date (RegExp.$1, RegExp.$2-1, RegExp.$3, RegExp.$4, RegExp.$5, RegExp.$6));
 }
 function dt2dtstr (dt_datetime) {
 	return (new String (
-			dt_datetime.getDate()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getFullYear()+" "));
+                        dt_datetime.getFullYear()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getDate()+" "));
+			//dt_datetime.getDate()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getFullYear()+" "));
 }
 function dt2tmstr (dt_datetime) {
 	return (new String (
