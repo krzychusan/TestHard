@@ -11,7 +11,7 @@ conn = sqlite3.connect(dbname)
 c = conn.cursor()
 c.execute('''
 	create table repositories (
-		id INTEGER PRIMARY KEY,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT UNIQUE,
 		url TEXT,
 		comment TEXT,
@@ -27,7 +27,7 @@ c.execute('''
 
 c.execute('''
     create table tasks (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         repository TEXT,
         test_time DATETIME,
@@ -38,7 +38,7 @@ c.execute('''
 
 c.execute('''
    create table results (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         task INTEGER,
         tests_count INTEGER,
         failures_count INTEGER,
