@@ -10,7 +10,8 @@ log = logging.getLogger(__name__)
 class ConfigureController(BaseController):
 
     def index(self):
-        # Return a rendered template
-        #return render('/configure.mako')
-        # or, return a response
-        return 'Hello World'
+        return render('configure.mako')
+
+    def doEdit(self):
+        pass
+

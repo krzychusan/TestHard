@@ -13,5 +13,5 @@ while True:
         print 'Launching task %s.' % tasks[0]['name']
         retcode = subprocess.call(["./run.sh", "run-server", tasks[0]['repository'], tasks[0]['name']])
         print 'Task %s done!' % tasks[0]['name']
-    time.sleep(5)
+    time.sleep(10)
     

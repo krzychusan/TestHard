@@ -34,7 +34,7 @@
     <label for="date" class="styled">Date:</label>
     <div class="thefield">
         <input type="Text" name="timestamp" value=""><a href="javascript:show_calendar('document.addRun.timestamp', document.addRun.timestamp.value);"><img src="cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-        <br><span style="font-size: 80%">*Note: Use graphical tool if you are not sure of format.</span>
+        <br><span style="font-size: 80%">*Note: Use graphical tool if you are unsure of format.</span>
     </div>
 </div>
 

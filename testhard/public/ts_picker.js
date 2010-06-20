@@ -117,9 +117,12 @@ function str2dt (str_datetime) {
 	return (new Date (RegExp.$1, RegExp.$2-1, RegExp.$3, RegExp.$4, RegExp.$5, RegExp.$6));
 }
 function dt2dtstr (dt_datetime) {
-	return (new String (
-                        dt_datetime.getFullYear()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getDate()+" "));
-			//dt_datetime.getDate()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getFullYear()+" "));
+        if (dt_datetime.getMonth()+1 > 9)
+	    return (new String (
+            dt_datetime.getFullYear()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getDate()+" "));
+        else
+            return (new String (
+            dt_datetime.getFullYear()+"-0"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getDate()+" "));
 }
 function dt2tmstr (dt_datetime) {
 	return (new String (
