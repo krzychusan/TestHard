@@ -105,7 +105,12 @@ class serverworker(Thread):
                 break
             self.server.workersLock.release()
 
-            results = self._test(job_file, job)
+            try:
+                results = self._test(job_file, job)
+            except ValueError:
+                print 'Blad podczas parsowania wyjscia'
+                continue
+
             rep = RepoManager()
             rep.addResult(self.server.taskName, results)
             print 'WYNIKI TESTOW'

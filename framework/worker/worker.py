@@ -11,10 +11,12 @@ class worker:
         self.host = ''
         self.port = 11111
         self.path = './ssvn'
-        os.chdir(self.path)
         #END
 
     def _compile(self):
+        cwd = os.getcwd()
+        os.chdir(self.path)
+
         script_cmds = self.data.msg.split('\n')
         for cmd in script_cmds:
             r = [0, 0, 0]
@@ -37,8 +39,12 @@ class worker:
         self.buffer.send(self.data)
 
         os.system('rm output.tmp')
+        os.chdir(cwd)
 
     def _run_test(self):
+        cwd = os.getcwd()
+        os.chdir(self.path)
+
         cmd = self.data.msg
         print 'Run', cmd
 
@@ -55,6 +61,7 @@ class worker:
         self.buffer.send(self.data)
         
         os.system('rm output.tmp')
+        os.chdir(cwd)
 
     def start(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

@@ -31,7 +31,7 @@ class server:
         self.workersFile = config.get('Worker', 'list')     #lista serverow
         self.workerPort = config.getint('Worker', 'port')       #port na ktorym nasluchuja workerzy
         self.path = config.get('Rep', 'path')       #tymczasowy katalog na dysku dla repozytorium
-        self.repository = repository.name       #adres repozytorium
+        self.repository = repository.url #adres repozytorium
         self.svnauth = repository.Auth      #czy wymagana autoryzacja do svna
         self.build_cmd = repository.build_cmd
         self.find_tests_cmd = repository.find_tests_cmd
@@ -43,12 +43,12 @@ class server:
             self.authLogin = repository.login #dane do autoryzacji do svna
             self.authPassword = repository.password
 
-            rep = RepoManager()
-            rep = rep.getRepositoriesTypes()[0]
+        rep = RepoManager()
+        rep = rep.getRepositoriesTypes()[0]
         self.svn = rep()
         if self.svnauth:
             self.svn.setLogin(self.authLogin, self.authPassword)
-            self.ftp = ftpServer.ftpServer(self.path, 2222)
+        self.ftp = ftpServer.ftpServer(self.path, 2222)
 
     def _find_tests(self):
         cwd = os.getcwd()
@@ -97,7 +97,7 @@ class server:
     def start(self):
         if self.svndownload:
             log('Pobieram svn...')
-            #self.svn.download(self.repository, self.path)
+            self.svn.download(self.repository, self.path)
             log('Svn pobrany.')
         else:
             log('Bez pobierania svn.')

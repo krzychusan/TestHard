@@ -4,10 +4,10 @@ class AntJUnitParser:
    
     def __init__(self, input, name=''):
         self.log = input
-        result = re.search('\[junit\] Tests run: (\d+), Failures: (\d+), Errors: (\d+), Time elapsed: (\d+[.,]\d+) sec', self.log)
+        result = re.search('\[junit\] Tests run: (\d+), Failures: (\d+), Errors: (\d+), Time elapsed: ([^ ]+) sec', self.log)
         if not result:
             print 'Parse error in AntJUnitParser!'
-            return
+            raise ValueException()
 
         vals = result.groups()
         self.tests_count = int(vals[0])

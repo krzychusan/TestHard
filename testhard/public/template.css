@@ -283,4 +283,6 @@ html {
     border: 1px solid #C3D0DA;
     padding: 10px;
     margin: 5px;
+    width: 97%;
+    overflow: auto;
 }

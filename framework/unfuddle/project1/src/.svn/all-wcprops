@@ -1,17 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 37
-/svn/testhard_project1/!svn/ver/1/src
-END
-Math.java
-K 25
-svn:wc:ra_dav:version-url
-V 47
-/svn/testhard_project1/!svn/ver/1/src/Math.java
-END
-TestMath.java
-K 25
-svn:wc:ra_dav:version-url
-V 51
-/svn/testhard_project1/!svn/ver/1/src/TestMath.java
+V 54
+/repos/asf/!svn/ver/956286/lucene/dev/trunk/lucene/src
 END
