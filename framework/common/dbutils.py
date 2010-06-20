@@ -53,7 +53,7 @@ def getUnfinishedTasks():
         left outer join results 
         on ts.id = task
         where timestamp is null
-        and test_time <= datetime('now','localtime')
+        and datetime(test_time) <= datetime('now','localtime')
         order by test_time 
         limit 1
     ''')
@@ -201,7 +201,6 @@ def getTasks():
         tasksDict.append( 
            setUpTask(row)
         )
-    print tasksDict
     conn.close()
     return tasksDict
 
