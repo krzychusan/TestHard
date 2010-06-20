@@ -124,7 +124,14 @@ def setUpRepositoryObject(row):
     repo.assign(row[0], row[1], row[2], row[3])
     if row[4] and len(row[4]) > 0:
         repo.setAuth(row[4], row[5])
-    repo.setTestAttributes(row[6], row[7], row[8])
+    tmp1, tmp2, tmp3 = '','',''
+    if row[6] is not None:
+        tmp1 = row[6]
+    if row[7] is not None:
+        tmp2 = row[7]
+    if row[8] is not None:
+        tmp3 = row[8]
+    repo.setTestAttributes(tmp1, tmp2, tmp3)
     if row[9] == 1:
         repo.compileOnServer = True
     return repo
