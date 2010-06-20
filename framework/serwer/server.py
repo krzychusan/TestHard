@@ -141,10 +141,10 @@ if __name__ == '__main__':
         rep = IRepository()
         rep.name = 'http://testhard.unfuddle.com/svn/testhard_project1/' #adres repozytorium
         rep.svnauth = True #czy wymagana autoryzacja do svna
-        #rep.find_tests_cmd = 'for i in `seq 1 100`; do echo $i; done'
-        rep.find_tests_cmd = 'find . -iname "*test*class"'
-        #rep.run_test_cmd = 'echo "[junit] Tests run: 1, Failures: 1, Errors: 1, Time elapsed: 1.1 sec $$"'
-        rep.run_test_cmd = 'ant test'
+        rep.find_tests_cmd = 'for i in `seq 1 10`; do echo $i; done'
+        #rep.find_tests_cmd = 'find . -iname "*test*class"'
+        rep.run_test_cmd = 'echo "[junit] Tests run: 1, Failures: 1, Errors: 1, Time elapsed: 1.1 sec $$"'
+        #rep.run_test_cmd = 'ant test'
         rep.auth = True
         rep.build_cmd = 'ant compile'
         rep.authLogin = 'krzychusan' #dane do autoryzacji do svna
