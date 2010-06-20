@@ -1,6 +1,5 @@
 import worker
 
-while 1:
-    program = worker.worker()
-    program.start()
+program = worker.worker()
+program.start()
 

@@ -17,7 +17,9 @@ if [ "$1" = "run-server" ]; then
     fi
 elif [ "$1" = "run-worker" ]; then
     cd worker
-    python $WORKER
+    while [ 1 ]; do
+        python $WORKER
+    done
 elif [ "$1" = "config-server" ]; then
     vim $CONSERVER
 elif [ "$1" = "compile-proto" ]; then
