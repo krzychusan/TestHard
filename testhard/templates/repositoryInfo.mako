@@ -18,7 +18,6 @@
 <h4>Build on server?:</h4>
 ${c.info.compileOnServer}<br><br>
 <h4>Build commands:</h4>
-<<<<<<< HEAD
 <pre class="shcode">${c.info.build_cmd}</pre>
 <br><br>
 
@@ -29,14 +28,6 @@ ${c.info.compileOnServer}<br><br>
 <h4>Run test command:</h4>
 <pre class="shcode">${c.info.run_test_cmd}</pre>
 <br><br>
-=======
-<pre>${c.info.build_cmd}</pre>
-
-<h4>Find test command:</h4>
-<pre>${c.info.find_tests_cmd}</pre><br>
-<h4>Run test command:</h4>
-<pre>${c.info.run_test_cmd}</pre><br>
->>>>>>> cab1b8fd1d86b42e68032fb9eec1e0010964723d
 
 ${h.link_to('Return', url('/repository'))}
 
