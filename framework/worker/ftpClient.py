@@ -6,7 +6,7 @@ import traceback
 
 class ftpClient:
 	def __init__(self, myip):
-		self.myip = myip
+                self.myip = myip
 		self.ftp = ftplib.FTP()
 
 	def download(self, url, path):
@@ -30,6 +30,8 @@ class ftpClient:
                         print 'Failed to connect to ftp'
 			#print self.formatExceptionInfo()
                         self.retry -= 1
+                        if self.retry < 1:
+                            return False
                 
 		self.close()
                 return True
