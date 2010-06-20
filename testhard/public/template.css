@@ -277,3 +277,10 @@ html {
 }
 #yui-main a:hover { text-decoration:underline;
 }
+
+.shcode {
+    background: #E3F0FA;
+    border: 1px solid #C3D0DA;
+    padding: 10px;
+    margin: 5px;
+}

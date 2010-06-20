@@ -32,7 +32,7 @@ class server:
         self.workerPort = config.getint('Worker', 'port')       #port na ktorym nasluchuja workerzy
         self.path = config.get('Rep', 'path')       #tymczasowy katalog na dysku dla repozytorium
         self.repository = repository.name       #adres repozytorium
-        self.svnauth = repository.auth      #czy wymagana autoryzacja do svna
+        self.svnauth = repository.Auth      #czy wymagana autoryzacja do svna
         self.build_cmd = repository.build_cmd
         self.find_tests_cmd = repository.find_tests_cmd
         self.run_test_cmd = repository.run_test_cmd

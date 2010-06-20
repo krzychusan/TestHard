@@ -16,7 +16,7 @@
     <br/>
     <b> TEST LOG: </b>
     <br/>
-    ${c.task['log']}
+    <pre class="shcode">${c.task['log']}</pre>
 %else:
     There is no log yet.
 %endif
