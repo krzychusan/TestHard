@@ -1,18 +1,12 @@
 [Rep]
-#czy pobierac svn
-download = False
-#adres repozytorium
 url = http://testhard.unfuddle.com/svn/testhard_project1/
-#sciezka gdzie bedzie zapisane repozytorium
-path = ./../unfuddle/project1
-#czy wymagana jest autoryzacja
 auth = True
-#Jezeli wymagana jest autoryzacja
+path = ./../unfuddle/project1
+download = False
 login = krzychusan
 password = 5120045
 
 [Worker]
-#plik z lista workerow
 list = workers.txt
-#port na ktorym nasluchuja workerzy
 port = 11111
+
