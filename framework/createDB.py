@@ -90,6 +90,17 @@ c.execute("""
    )
 """)
 
+c.execute("""
+   insert into tasks
+   (name, test_time, email, repository)
+   values (
+        'SimpleCheck2',
+        '12-02-2011 00:45:00',
+        'admin@tomaszow.com',
+        'abcd'
+   )
+""")
+
 conn.commit()
 conn.close()
 
