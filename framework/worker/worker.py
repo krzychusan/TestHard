@@ -83,7 +83,8 @@ class worker:
                 self.data.msg = 'pong'
                 self.buffer.send(self.data)
             elif self.data.typ == pakiet.FTPDOWNLOAD:
-                self.ftp.download((self.data.msg, self.data.port), self.path)
+                if not self.ftp.download((self.data.msg, self.data.port), self.path):
+                    return
                 self.data = pakiet()
                 self.data.typ = pakiet.FTPDOWNLOAD
                 self.data.msg = 'ok'
