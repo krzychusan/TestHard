@@ -3,6 +3,7 @@ import os
 
 import sys
 import traceback
+import time
 
 class ftpClient:
 	def __init__(self, myip):
@@ -28,6 +29,7 @@ class ftpClient:
                         self.done = True
 		    except:
                         print 'Failed to connect to ftp'
+                        time.sleep(15)
 			#print self.formatExceptionInfo()
                         self.retry -= 1
                         if self.retry < 1:
